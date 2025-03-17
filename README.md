@@ -14,7 +14,7 @@ Ce projet est un **antivirus automatisé** qui surveille un repertoire spécifiq
 
 ```bash
 sudo apt update && sudo apt install -y clamav clamav-daemon python3 python3-pip
-pip install watchdog
+pip install watchdog requests
 ```
 
 ### 2 Mise à jour de la base de virus
@@ -42,3 +42,5 @@ Le fichier infecté devrait être **déplacé en quarantaine** automatiquement.
 ## Améliorations possibles
 
 - Création d'une interface web pour gérer les fichiers en quarantaine
+
+* Ajouter un système de journalisation pour enregistrer les détections et les actions effectuées.
