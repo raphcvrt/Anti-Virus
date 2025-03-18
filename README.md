@@ -7,30 +7,20 @@ Ce projet est un **antivirus automatisé** qui surveille un repertoire spécifiq
 ### Sécurité
 
 - Analyse en temps réel avec ClamAV et VirusTotal.
-- Mise en quarantaine automatique des fichiers infectés.
-- Alertes Discord en temps réel.
 - Journalisation structurée des événements.
 
 ### Efficacité
 
-- Analyse parallèle pour des résultats rapides.
-- Surveillance de dossier en temps réel avec fsnotify.
-- Interface RESTful pour l'upload et la gestion des analyses.
-
-### Optimisation
-
-- Utilisation de goroutines pour un traitement parallèle.
+- Analyse parallèle pour des résultats rapides avec des goroutines.
 - Gestion des ressources pour éviter les fuites de mémoire.
 - Logs au format JSON pour une intégration facile avec des outils de monitoring.
 
 ### Technologies
 
-- **Langages** : Go, HTML/CSS/JavaScript.
 - **Bibliothèques** : Gin, Logrus, fsnotify, ClamAV, VirusTotal API.
-- **Outils** : Discord Webhook, Goroutines.
 
 ### Améliorations Possibles
 
 - Chiffrement des clés API.
-- Analyse comportementale.
-- Support multi-utilisateurs.
+- securisation avancée du server
+- darkmode

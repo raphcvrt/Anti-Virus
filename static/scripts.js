@@ -55,6 +55,39 @@ function fetchStats() {
         });
 }
 
+// Fonction pour activer/désactiver le dark mode
+function toggleDarkMode() {
+    const body = document.body;
+    const themeToggle = document.getElementById("theme-toggle");
+
+    // Basculer entre les thèmes
+    if (body.getAttribute("data-theme") === "dark") {
+        body.setAttribute("data-theme", "light");
+        localStorage.setItem("theme", "light");
+        themeToggle.querySelector(".toggle-ball").style.transform = "translateX(0)";
+    } else {
+        body.setAttribute("data-theme", "dark");
+        localStorage.setItem("theme", "dark");
+        themeToggle.querySelector(".toggle-ball").style.transform = "translateX(30px)";
+    }
+}
+
+// Initialiser le thème au chargement de la page
+function initializeTheme() {
+    const body = document.body;
+    const themeToggle = document.getElementById("theme-toggle");
+    const savedTheme = localStorage.getItem("theme");
+
+    // Appliquer le thème sauvegardé ou le thème par défaut (light)
+    if (savedTheme === "dark") {
+        body.setAttribute("data-theme", "dark");
+        themeToggle.querySelector(".toggle-ball").style.transform = "translateX(30px)";
+    } else {
+        body.setAttribute("data-theme", "light");
+        themeToggle.querySelector(".toggle-ball").style.transform = "translateX(0)";
+    }
+}
+
 // Initialisation du dashboard
 document.addEventListener('DOMContentLoaded', function() {
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -64,7 +97,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // Récupérer les données en temps réel depuis le backend
     fetchRecentScans();
     fetchStats();
+
+    // Initialiser le thème
+    initializeTheme();
+
+    // Ajouter un écouteur d'événement pour le bouton de bascule de thème
+    const themeToggle = document.getElementById("theme-toggle");
+    themeToggle.addEventListener("click", toggleDarkMode);
 });
+
+// Gestion de l'upload de fichiers
 document.addEventListener("DOMContentLoaded", function () {
     const dropzone = document.getElementById("dropzone");
     const fileInput = document.getElementById("file-input");

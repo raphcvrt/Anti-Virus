@@ -9,16 +9,13 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
-	"sync"
 	"time"
 
 	"github.com/gin-gonic/gin"
 )
 
 var (
-	watcherRunning bool
-	watcherMutex   sync.Mutex
-	templates      *template.Template
+	templates *template.Template
 )
 
 // Structure pour les données d'analyse
@@ -39,22 +36,6 @@ type Stats struct {
 	ProtectionRate  int `json:"protection_rate"`
 }
 
-// Structure pour les dossiers surveillés
-type WatchedFolder struct {
-	Path      string `json:"path"`
-	Status    string `json:"status"`
-	StartDate string `json:"start_date"`
-}
-
-// Structure pour les fichiers en quarantaine
-type QuarantineFile struct {
-	ID        string `json:"id"`
-	FileName  string `json:"file_name"`
-	Date      string `json:"date"`
-	Status    string `json:"status"`
-	Signature string `json:"signature"`
-}
-
 // Données réelles (initialisées à zéro ou vides)
 var recentScans = []ScanResult{}
 
@@ -65,12 +46,6 @@ var stats = Stats{
 	WatchedFolders:  0,
 	ProtectionRate:  0,
 }
-
-// Liste de dossiers surveillés vide
-var watchedFolders = []WatchedFolder{}
-
-// Liste de fichiers en quarantaine vide
-var quarantineFiles = []QuarantineFile{}
 
 func main() {
 	// Initialiser le système de journalisation
@@ -96,10 +71,7 @@ func main() {
 	// Configurer les routes pour les pages
 	r.GET("/", renderDashboard)
 	r.GET("/analyse", renderAnalyse)
-	r.GET("/surveillance", renderSurveillance)
 	r.GET("/historique", renderHistorique)
-	r.GET("/quarantaine", renderQuarantaine)
-	r.GET("/parametres", renderParametres)
 
 	// Route pour uploader un fichier
 	r.POST("/upload", func(c *gin.Context) {
@@ -123,84 +95,7 @@ func main() {
 			return
 		}
 
-		// Envoyer une alerte Discord si le fichier est infecté
-		if result == "infected" {
-			sendDiscordAlert(fmt.Sprintf("⚠️ Fichier infecté détecté : %s", file.Filename))
-			logEvent("Fichier infecté détecté", map[string]interface{}{
-				"file":   file.Filename,
-				"result": result,
-			})
-		}
-
 		c.JSON(http.StatusOK, gin.H{"filename": file.Filename, "result": result})
-	})
-
-	// Route pour démarrer la surveillance
-	r.POST("/start-watch", func(c *gin.Context) {
-		var req struct {
-			FolderPath string `json:"folder_path"`
-		}
-		if err := c.ShouldBindJSON(&req); err != nil {
-			logEvent("Requête invalide pour démarrer la surveillance", map[string]interface{}{
-				"error": err.Error(),
-			})
-			c.JSON(http.StatusBadRequest, gin.H{"error": "Requête invalide"})
-			return
-		}
-
-		if err := startWatcher(req.FolderPath); err != nil {
-			logEvent("Erreur lors du démarrage de la surveillance", map[string]interface{}{
-				"folder": req.FolderPath,
-				"error":  err.Error(),
-			})
-			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-			return
-		}
-
-		// Ajouter le dossier à la liste des dossiers surveillés
-		watchedFolders = append(watchedFolders, WatchedFolder{
-			Path:      req.FolderPath,
-			Status:    "Active",
-			StartDate: time.Now().Format("02/01/2006 15:04"),
-		})
-
-		logEvent("Surveillance démarrée", map[string]interface{}{
-			"folder": req.FolderPath,
-		})
-		c.JSON(http.StatusOK, gin.H{"message": "Surveillance démarrée"})
-	})
-
-	// Route pour arrêter la surveillance
-	r.POST("/stop-watch", func(c *gin.Context) {
-		var req struct {
-			FolderPath string `json:"folder_path"`
-		}
-		if err := c.ShouldBindJSON(&req); err != nil {
-			logEvent("Requête invalide pour arrêter la surveillance", map[string]interface{}{
-				"error": err.Error(),
-			})
-			c.JSON(http.StatusBadRequest, gin.H{"error": "Requête invalide"})
-			return
-		}
-
-		if err := stopWatcher(); err != nil {
-			logEvent("Erreur lors de l'arrêt de la surveillance", map[string]interface{}{
-				"error": err.Error(),
-			})
-			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-			return
-		}
-
-		// Mettre à jour le statut du dossier
-		for i, folder := range watchedFolders {
-			if folder.Path == req.FolderPath {
-				watchedFolders[i].Status = "Inactive"
-				break
-			}
-		}
-
-		logEvent("Surveillance arrêtée", nil)
-		c.JSON(http.StatusOK, gin.H{"message": "Surveillance arrêtée"})
 	})
 
 	// Routes API pour les données
@@ -210,14 +105,6 @@ func main() {
 
 	r.GET("/api/stats", func(c *gin.Context) {
 		c.JSON(http.StatusOK, stats)
-	})
-
-	r.GET("/api/watched-folders", func(c *gin.Context) {
-		c.JSON(http.StatusOK, watchedFolders)
-	})
-
-	r.GET("/api/quarantine-files", func(c *gin.Context) {
-		c.JSON(http.StatusOK, quarantineFiles)
 	})
 
 	// Démarrer le serveur
@@ -245,16 +132,6 @@ func renderAnalyse(c *gin.Context) {
 	renderTemplate(c.Writer, templates, "analyse.html", data)
 }
 
-// Fonction pour rendre la page de surveillance
-func renderSurveillance(c *gin.Context) {
-	data := TemplateData{
-		Title:          "AVSecure - Surveillance",
-		ActivePage:     "surveillance",
-		WatchedFolders: watchedFolders,
-	}
-	renderTemplate(c.Writer, templates, "surveillance.html", data)
-}
-
 // Fonction pour rendre la page d'historique
 func renderHistorique(c *gin.Context) {
 	data := TemplateData{
@@ -263,25 +140,6 @@ func renderHistorique(c *gin.Context) {
 		RecentScans: recentScans,
 	}
 	renderTemplate(c.Writer, templates, "historique.html", data)
-}
-
-// Fonction pour rendre la page de quarantaine
-func renderQuarantaine(c *gin.Context) {
-	data := TemplateData{
-		Title:           "AVSecure - Quarantaine",
-		ActivePage:      "quarantaine",
-		QuarantineFiles: quarantineFiles,
-	}
-	renderTemplate(c.Writer, templates, "quarantaine.html", data)
-}
-
-// Fonction pour rendre la page de paramètres
-func renderParametres(c *gin.Context) {
-	data := TemplateData{
-		Title:      "AVSecure - Paramètres",
-		ActivePage: "parametres",
-	}
-	renderTemplate(c.Writer, templates, "parametres.html", data)
 }
 
 // Analyse d'un fichier
@@ -394,17 +252,6 @@ func analyzeFile(file *multipart.FileHeader) (string, error) {
 	stats.FilesScanned++
 	if finalResult == "infected" {
 		stats.ThreatsDetected++
-
-		// Ajouter à la quarantaine si infecté
-		quarantineFiles = append([]QuarantineFile{
-			{
-				ID:        fmt.Sprintf("%d", len(quarantineFiles)+1),
-				FileName:  file.Filename,
-				Date:      time.Now().Format("02/01/2006 15:04"),
-				Status:    "Isolé",
-				Signature: "Détecté par ClamAV et/ou VirusTotal",
-			},
-		}, quarantineFiles...)
 	}
 
 	// Calculer le taux de protection
@@ -424,48 +271,4 @@ func analyzeFile(file *multipart.FileHeader) (string, error) {
 	}
 
 	return finalResult, nil
-}
-
-// Démarrer la surveillance
-func startWatcher(folderPath string) error {
-	watcherMutex.Lock()
-	defer watcherMutex.Unlock()
-
-	if watcherRunning {
-		return fmt.Errorf("la surveillance est déjà en cours")
-	}
-
-	// Démarrer la surveillance du dossier
-	go watchFolder(folderPath)
-	watcherRunning = true
-
-	// Mettre à jour les statistiques
-	stats.WatchedFolders++
-
-	// Journaliser le démarrage de la surveillance
-	logEvent("Surveillance démarrée", map[string]interface{}{
-		"folder": folderPath,
-	})
-
-	return nil
-}
-
-// Arrêter la surveillance
-func stopWatcher() error {
-	watcherMutex.Lock()
-	defer watcherMutex.Unlock()
-
-	if !watcherRunning {
-		return fmt.Errorf("aucune surveillance en cours")
-	}
-
-	watcherRunning = false
-
-	// Mettre à jour les statistiques
-	stats.WatchedFolders--
-
-	// Journaliser l'arrêt de la surveillance
-	logEvent("Surveillance arrêtée", nil)
-
-	return nil
 }

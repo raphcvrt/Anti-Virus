@@ -10,7 +10,7 @@
         <div class="card-header">
             <span class="card-title">Fichiers analysés</span>
             <div class="card-icon icon-primary">
-                <i class="fas fa-file-search"></i>
+                <i class="fas fa-folder"></i>
             </div>
         </div>
         <div class="card-value" id="files-scanned">{{ .Stats.FilesScanned }}</div>
@@ -24,16 +24,6 @@
             </div>
         </div>
         <div class="card-value" id="threats-detected">{{ .Stats.ThreatsDetected }}</div>
-    </div>
-
-    <div class="card">
-        <div class="card-header">
-            <span class="card-title">En surveillance</span>
-            <div class="card-icon icon-warning">
-                <i class="fas fa-folder"></i>
-            </div>
-        </div>
-        <div class="card-value" id="watched-folders">{{ .Stats.WatchedFolders }}</div>
     </div>
 
     <div class="card">
@@ -62,29 +52,6 @@
             </div>
             <input type="file" id="file-input" style="display: none;" />
             <button class="upload-button" id="upload-button">Choisir un fichier</button>
-        </div>
-    </div>
-
-    <!-- Chart section -->
-    <div class="dashboard-section">
-        <h2 class="section-title">Activité récente</h2>
-        <div class="table-container">
-            <canvas id="activity-chart" class="chart-container"></canvas>
-        </div>
-    </div>
-</div>
-
-<!-- Watch Folder section -->
-<div class="dashboard-section">
-    <h2 class="section-title">Surveillance de dossier</h2>
-    <div class="table-container">
-        <p>Configurez un dossier à surveiller. AVSecure analysera automatiquement tout nouveau fichier.</p>
-        <div class="folder-watch">
-            <input type="text" class="folder-input" id="folder-path" placeholder="/chemin/vers/dossier" />
-            <button class="watch-button" id="watch-button">Démarrer</button>
-        </div>
-        <div id="watch-status" style="margin-top: 10px; display: none;">
-            <span class="spinner"></span> Surveillance active
         </div>
     </div>
 </div>

@@ -137,3 +137,42 @@
 {"file":"eicar.com","level":"info","msg":"Fichier infecté détecté","result":"infected","time":"2025-03-18T19:20:51+01:00"}
 {"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-18T21:38:31+01:00"}
 {"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-18T21:59:43+01:00"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-18T21:01:45Z"}
+{"file":"/tmp/scanner.go","level":"info","msg":"Fichier analysé avec ClamAV","result":"clean","time":"2025-03-18T21:02:26Z"}
+{"file":"scanner.go","level":"info","msg":"Résultat de l'analyse ClamAV","result":"clean","time":"2025-03-18T21:02:26Z"}
+{"file":"/tmp/scanner.go","level":"info","msg":"Fichier analysé avec ClamAV","result":"clean","time":"2025-03-18T21:02:26Z"}
+{"file":"scanner.go","level":"info","msg":"Résultat de l'analyse ClamAV","result":"clean","time":"2025-03-18T21:02:26Z"}
+{"file":"/tmp/scanner.go","level":"info","msg":"Fichier analysé avec VirusTotal","result":"clean","time":"2025-03-18T21:02:45Z"}
+{"file":"scanner.go","level":"info","msg":"Résultat de l'analyse VirusTotal","result":"clean","time":"2025-03-18T21:02:45Z"}
+{"file":"scanner.go","level":"info","msg":"Résultat final de l'analyse","result":"clean","time":"2025-03-18T21:02:45Z"}
+{"file":"/tmp/scanner.go","level":"info","msg":"Fichier analysé avec VirusTotal","result":"clean","time":"2025-03-18T21:02:45Z"}
+{"file":"scanner.go","level":"info","msg":"Résultat de l'analyse VirusTotal","result":"clean","time":"2025-03-18T21:02:45Z"}
+{"file":"scanner.go","level":"info","msg":"Résultat final de l'analyse","result":"clean","time":"2025-03-18T21:02:45Z"}
+{"file":"/tmp/eicar.com","level":"info","msg":"Fichier infecté détecté","result":"infected","time":"2025-03-18T21:12:45Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat de l'analyse ClamAV","result":"infected","time":"2025-03-18T21:12:45Z"}
+{"file":"/tmp/eicar.com","level":"info","msg":"Fichier infecté détecté","result":"infected","time":"2025-03-18T21:12:45Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat de l'analyse ClamAV","result":"infected","time":"2025-03-18T21:12:45Z"}
+{"file":"/tmp/eicar.com","level":"info","msg":"Fichier analysé avec VirusTotal","result":"clean","time":"2025-03-18T21:13:00Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat de l'analyse VirusTotal","result":"clean","time":"2025-03-18T21:13:00Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat final de l'analyse","result":"infected","time":"2025-03-18T21:13:00Z"}
+{"file":"/tmp/eicar.com","level":"info","msg":"Fichier analysé avec VirusTotal","result":"clean","time":"2025-03-18T21:13:00Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat de l'analyse VirusTotal","result":"clean","time":"2025-03-18T21:13:00Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat final de l'analyse","result":"infected","time":"2025-03-18T21:13:00Z"}
+{"file":"eicar.com","level":"info","msg":"Fichier infecté détecté","result":"infected","time":"2025-03-18T21:13:01Z"}
+{"file":"eicar.com","level":"info","msg":"Fichier infecté détecté","result":"infected","time":"2025-03-18T21:13:01Z"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-18T21:29:00Z"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-18T21:33:20Z"}
+{"error":"open templates/surveillance.html: no such file or directory","level":"info","msg":"Erreur lors du chargement des templates","time":"2025-03-18T21:33:20Z"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-18T21:34:49Z"}
+{"error":"open templates/surveillance.html: no such file or directory","level":"info","msg":"Erreur lors du chargement des templates","time":"2025-03-18T21:34:49Z"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-18T21:36:35Z"}
+{"error":"open templates/surveillance.html: no such file or directory","level":"info","msg":"Erreur lors du chargement des templates","time":"2025-03-18T21:36:35Z"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-18T21:40:08Z"}
+{"error":"open templates/surveillance.html: no such file or directory","level":"info","msg":"Erreur lors du chargement des templates","time":"2025-03-18T21:40:08Z"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-18T21:42:02Z"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-18T21:51:12Z"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-18T21:56:30Z"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-18T21:59:47Z"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-18T22:03:49Z"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-18T22:06:45Z"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-18T22:11:05Z"}

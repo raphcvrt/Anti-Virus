@@ -9,13 +9,11 @@ import (
 
 // Structure pour les données partagées entre tous les templates
 type TemplateData struct {
-	Title           string
-	ActivePage      string
-	Stats           Stats
-	RecentScans     []ScanResult
-	WatchedFolders  []WatchedFolder
-	QuarantineFiles []QuarantineFile
-	FlashMessage    string
+	Title        string
+	ActivePage   string
+	Stats        Stats
+	RecentScans  []ScanResult
+	FlashMessage string
 }
 
 // Fonction pour charger et parser tous les templates
@@ -43,10 +41,7 @@ func loadTemplates(templatesDir string) (*template.Template, error) {
 	contentTemplates := []string{
 		filepath.Join(templatesDir, "index.html"),
 		filepath.Join(templatesDir, "analyse.html"),
-		filepath.Join(templatesDir, "surveillance.html"),
 		filepath.Join(templatesDir, "historique.html"),
-		filepath.Join(templatesDir, "quarantaine.html"),
-		filepath.Join(templatesDir, "parametres.html"),
 	}
 
 	tmpl, err = tmpl.ParseFiles(contentTemplates...)
