@@ -221,7 +221,7 @@ func main() {
 	})
 
 	// Démarrer le serveur
-	r.Run(":9555")
+	r.Run("0.0.0.0:9555")
 }
 
 // Fonction pour rendre la page d'accueil

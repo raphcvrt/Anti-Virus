@@ -135,3 +135,5 @@
 {"file":"eicar.com","level":"info","msg":"Résultat final de l'analyse","result":"infected","time":"2025-03-18T19:20:51+01:00"}
 {"file":"eicar.com","level":"info","msg":"Fichier infecté détecté","result":"infected","time":"2025-03-18T19:20:51+01:00"}
 {"file":"eicar.com","level":"info","msg":"Fichier infecté détecté","result":"infected","time":"2025-03-18T19:20:51+01:00"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-18T21:38:31+01:00"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-18T21:59:43+01:00"}
