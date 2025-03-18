@@ -1,0 +1,36 @@
+<div class="main-content">
+    <div class="header">
+        <h1>Paramètres</h1>
+        <div class="date" id="current-date">Chargement...</div>
+    </div>
+
+    <!-- Configuration des Clés API -->
+    <div class="dashboard-section">
+        <h2 class="section-title">Clés API</h2>
+        <div class="settings-section">
+            <div class="settings-group">
+                <label class="settings-label" for="virus-total-api">Clé API VirusTotal</label>
+                <input type="text" class="settings-input" id="virus-total-api" placeholder="Entrez votre clé API VirusTotal" />
+            </div>
+            <div class="settings-group">
+                <label class="settings-label" for="discord-webhook">Webhook Discord</label>
+                <input type="text" class="settings-input" id="discord-webhook" placeholder="Entrez votre URL de webhook Discord" />
+            </div>
+            <button class="settings-save" id="save-settings">Enregistrer</button>
+        </div>
+    </div>
+
+    <!-- Notifications -->
+    <div class="dashboard-section">
+        <h2 class="section-title">Notifications</h2>
+        <div class="settings-section">
+            <div class="toggle-row">
+                <label class="switch">
+                    <input type="checkbox" id="enable-notifications" checked />
+                    <span class="slider"></span>
+                </label>
+                <span>Activer les notifications</span>
+            </div>
+        </div>
+    </div>
+</div>

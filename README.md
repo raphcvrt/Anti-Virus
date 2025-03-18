@@ -2,45 +2,35 @@
 
 Ce projet est un **antivirus automatisé** qui surveille un repertoire spécifique et analyse les fichiers en temps réel. Lorsqu'un fichier infecté est détecté, il est immédiatement **mis en quarantaine** et l'utilisateur recois une notification.
 
-## 🛠️ Technologies utilisées
+## Fonctionnalités
 
-- **Python** (surveillance et automatisation)
-- **Watchdog** (détecter les nouveaux fichiers)
-- **ClamAV** (antivirus open-source)
+### Sécurité
 
-## Installation et Utilisation
+- Analyse en temps réel avec ClamAV et VirusTotal.
+- Mise en quarantaine automatique des fichiers infectés.
+- Alertes Discord en temps réel.
+- Journalisation structurée des événements.
 
-### 1 Installation des dépendances
+### Efficacité
 
-```bash
-sudo apt update && sudo apt install -y clamav clamav-daemon python3 python3-pip
-pip install watchdog requests
-```
+- Analyse parallèle pour des résultats rapides.
+- Surveillance de dossier en temps réel avec fsnotify.
+- Interface RESTful pour l'upload et la gestion des analyses.
 
-### 2 Mise à jour de la base de virus
+### Optimisation
 
-```bash
-sudo systemctl stop clamav-freshclam
-sudo freshclam
-sudo systemctl start clamav-freshclam
-```
+- Utilisation de goroutines pour un traitement parallèle.
+- Gestion des ressources pour éviter les fuites de mémoire.
+- Logs au format JSON pour une intégration facile avec des outils de monitoring.
 
-### 3 Création des dossiers de scan et de quarantaine
+### Technologies
 
-```bash
-mkdir -p ~/Documents/scans ~/Documents/quarantaine
-```
+- **Langages** : Go, HTML/CSS/JavaScript.
+- **Bibliothèques** : Gin, Logrus, fsnotify, ClamAV, VirusTotal API.
+- **Outils** : Discord Webhook, Goroutines.
 
-### 4 Lancement du script
+### Améliorations Possibles
 
-```bash
-python3 AVscan.py
-```
-
-Le fichier infecté devrait être **déplacé en quarantaine** automatiquement.
-
-## Améliorations possibles
-
-- Création d'une interface web pour gérer les fichiers en quarantaine
-
-* Ajouter un système de journalisation pour enregistrer les détections et les actions effectuées.
+- Chiffrement des clés API.
+- Analyse comportementale.
+- Support multi-utilisateurs.
