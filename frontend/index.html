@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AVSecure - Dashboard</title>
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="/static/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
@@ -16,12 +16,12 @@
                 AVSecure
             </div>
             <ul class="nav-links">
-                <li><a href="./index.html" id="dashboard-link"><i class="fas fa-chart-line"></i> Tableau de bord</a></li>
-                <li><a href="./analyse.html" id="analyse-link"><i class="fas fa-file-medical-alt"></i> Analyse de fichiers</a></li>
-                <li><a href="./surveillance.html" id="surveillance-link"><i class="fas fa-folder-open"></i> Surveillance</a></li>
-                <li><a href="./frontend/historique.html" id="historique-link"><i class="fas fa-history"></i> Historique</a></li>
-                <li><a href="./frontend/quarantaine.html" id="quarantaine-link"><i class="fas fa-shield-alt"></i> Quarantaine</a></li>
-                <li><a href="./frontend/parametres.html" id="parametres-link"><i class="fas fa-cog"></i> Paramètres</a></li>
+                <li><a href="/index.html" id="dashboard-link"><i class="fas fa-chart-line"></i> Tableau de bord</a></li>
+                <li><a href="/analyse.html" id="analyse-link"><i class="fas fa-file-medical-alt"></i> Analyse de fichiers</a></li>
+                <li><a href="/surveillance.html" id="surveillance-link"><i class="fas fa-folder-open"></i> Surveillance</a></li>
+                <li><a href="/frontend/historique.html" id="historique-link"><i class="fas fa-history"></i> Historique</a></li>
+                <li><a href="/frontend/quarantaine.html" id="quarantaine-link"><i class="fas fa-shield-alt"></i> Quarantaine</a></li>
+                <li><a href="/frontend/parametres.html" id="parametres-link"><i class="fas fa-cog"></i> Paramètres</a></li>
             </ul>
         </div>
 
@@ -42,9 +42,6 @@
                         </div>
                     </div>
                     <div class="card-value" id="files-scanned">0</div>
-                    <div class="card-trend">
-                        <span class="trend-up"><i class="fas fa-arrow-up"></i> 0%</span> depuis hier
-                    </div>
                 </div>
 
                 <div class="card">
@@ -55,9 +52,6 @@
                         </div>
                     </div>
                     <div class="card-value" id="threats-detected">0</div>
-                    <div class="card-trend">
-                        <span class="trend-down"><i class="fas fa-arrow-down"></i> 0%</span> depuis hier
-                    </div>
                 </div>
 
                 <div class="card">
@@ -67,8 +61,6 @@
                             <i class="fas fa-folder"></i>
                         </div>
                     </div>
-                    <div class="card-value" id="watched-folders">0</div>
-                    <div class="card-trend">Aucun changement depuis hier</div>
                 </div>
 
                 <div class="card">
@@ -79,9 +71,6 @@
                         </div>
                     </div>
                     <div class="card-value" id="protection-rate">0%</div>
-                    <div class="card-trend">
-                        <span class="trend-up"><i class="fas fa-arrow-up"></i> 0%</span> depuis hier
-                    </div>
                 </div>
             </div>
 
@@ -172,6 +161,6 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chart.js/3.9.1/chart.min.js"></script>
-    <script src="scripts.js"></script>
+    <script src="/static/scripts.js"></script>
 </body>
 </html>

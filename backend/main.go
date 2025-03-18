@@ -56,7 +56,7 @@ func main() {
 
 	r := gin.Default()
 
-	// Servir les fichiers statiques du frontend
+	// Servir les fichiers statiques du frontend sous /static
 	r.Static("/static", "./frontend")
 
 	// Route pour uploader un fichier
