@@ -65,3 +65,66 @@ document.addEventListener('DOMContentLoaded', function() {
     fetchRecentScans();
     fetchStats();
 });
+document.addEventListener("DOMContentLoaded", function () {
+    const dropzone = document.getElementById("dropzone");
+    const fileInput = document.getElementById("file-input");
+    const uploadButton = document.getElementById("upload-button");
+
+    // Gérer le clic sur le bouton "Choisir un fichier"
+    uploadButton.addEventListener("click", function () {
+        fileInput.click(); // Déclencher le sélecteur de fichiers
+    });
+
+    // Gérer la sélection de fichiers
+    fileInput.addEventListener("change", function (e) {
+        const file = e.target.files[0];
+        if (file) {
+            uploadFile(file);
+        }
+    });
+
+    // Gérer le glisser-déposer
+    dropzone.addEventListener("dragover", function (e) {
+        e.preventDefault();
+        dropzone.classList.add("dragover");
+    });
+
+    dropzone.addEventListener("dragleave", function () {
+        dropzone.classList.remove("dragover");
+    });
+
+    dropzone.addEventListener("drop", function (e) {
+        e.preventDefault();
+        dropzone.classList.remove("dragover");
+
+        const file = e.dataTransfer.files[0];
+        if (file) {
+            uploadFile(file);
+        }
+    });
+
+    // Fonction pour envoyer le fichier au backend
+    function uploadFile(file) {
+        const formData = new FormData();
+        formData.append("file", file);
+
+        fetch("/upload", {
+            method: "POST",
+            body: formData,
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.error) {
+                    alert("Erreur : " + data.error);
+                } else {
+                    alert("Fichier analysé : " + data.result);
+                    // Actualiser la page ou afficher les résultats
+                    window.location.reload(); // Par exemple, recharger la page
+                }
+            })
+            .catch((error) => {
+                console.error("Erreur lors de l'upload :", error);
+                alert("Une erreur s'est produite lors de l'upload.");
+            });
+    }
+});

@@ -63,3 +63,21 @@
 {"error":"open templates/parametres.html: no such file or directory","level":"info","msg":"Erreur lors du chargement des templates","time":"2025-03-18T17:31:50+01:00"}
 {"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-18T17:32:04+01:00"}
 {"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-18T17:32:53+01:00"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-18T18:01:30+01:00"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-18T18:05:59+01:00"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-18T18:23:19+01:00"}
+{"error":"exec: \"clamscan\": executable file not found in $PATH","file":"/tmp/OPNsense-25.1-dvd-amd64.iso.bz2","level":"info","msg":"Erreur lors de l'analyse ClamAV","time":"2025-03-18T18:24:08+01:00"}
+{"error":"erreur ClamAV: erreur lors de l'analyse: ","file":"OPNsense-25.1-dvd-amd64.iso.bz2","level":"info","msg":"Erreur lors de l'analyse","time":"2025-03-18T18:24:08+01:00"}
+{"error":"exec: \"clamscan\": executable file not found in $PATH","file":"/tmp/OPNsense-25.1-dvd-amd64.iso.bz2","level":"info","msg":"Erreur lors de l'analyse ClamAV","time":"2025-03-18T18:24:08+01:00"}
+{"error":"erreur ClamAV: erreur lors de l'analyse: ","file":"OPNsense-25.1-dvd-amd64.iso.bz2","level":"info","msg":"Erreur lors de l'analyse","time":"2025-03-18T18:24:08+01:00"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-18T18:32:36+01:00"}
+{"file":"/tmp/go.mod","level":"info","msg":"Fichier analysé avec ClamAV","result":"clean","time":"2025-03-18T18:33:05+01:00"}
+{"file":"go.mod","level":"info","msg":"Résultat de l'analyse ClamAV","result":"clean","time":"2025-03-18T18:33:05+01:00"}
+{"file":"/tmp/go.mod","level":"info","msg":"Fichier analysé avec ClamAV","result":"clean","time":"2025-03-18T18:33:05+01:00"}
+{"file":"go.mod","level":"info","msg":"Résultat de l'analyse ClamAV","result":"clean","time":"2025-03-18T18:33:05+01:00"}
+{"file":"/tmp/go.mod","level":"info","msg":"Fichier analysé avec VirusTotal","result":"clean","time":"2025-03-18T18:33:24+01:00"}
+{"file":"go.mod","level":"info","msg":"Résultat de l'analyse VirusTotal","result":"clean","time":"2025-03-18T18:33:24+01:00"}
+{"file":"go.mod","level":"info","msg":"Résultat final de l'analyse","result":"clean","time":"2025-03-18T18:33:24+01:00"}
+{"file":"/tmp/go.mod","level":"info","msg":"Fichier analysé avec VirusTotal","result":"clean","time":"2025-03-18T18:33:24+01:00"}
+{"file":"go.mod","level":"info","msg":"Résultat de l'analyse VirusTotal","result":"clean","time":"2025-03-18T18:33:24+01:00"}
+{"file":"go.mod","level":"info","msg":"Résultat final de l'analyse","result":"clean","time":"2025-03-18T18:33:24+01:00"}
