@@ -55,29 +55,22 @@ type QuarantineFile struct {
 	Signature string `json:"signature"`
 }
 
-// Données factices pour les analyses récentes (à remplacer par une base de données)
-var recentScans = []ScanResult{
-	{ID: "1", FileName: "document.pdf", Date: time.Now().Format("02/01/2006 15:04"), ClamAVResult: "Clean", VirusTotalResult: "Clean", Status: "Clean"},
-	{ID: "2", FileName: "setup.exe", Date: time.Now().Format("02/01/2006 15:04"), ClamAVResult: "Infected", VirusTotalResult: "Infected", Status: "Infected"},
-}
+// Données réelles (initialisées à zéro ou vides)
+var recentScans = []ScanResult{}
 
-// Données factices pour les statistiques (à remplacer par une base de données)
+// Statistiques initialisées à zéro
 var stats = Stats{
-	FilesScanned:    178,
-	ThreatsDetected: 7,
-	WatchedFolders:  1,
-	ProtectionRate:  96,
+	FilesScanned:    0,
+	ThreatsDetected: 0,
+	WatchedFolders:  0,
+	ProtectionRate:  0,
 }
 
-// Données factices pour les dossiers surveillés
-var watchedFolders = []WatchedFolder{
-	{Path: "/home/user/documents", Status: "Active", StartDate: time.Now().Format("02/01/2006 15:04")},
-}
+// Liste de dossiers surveillés vide
+var watchedFolders = []WatchedFolder{}
 
-// Données factices pour les fichiers en quarantaine
-var quarantineFiles = []QuarantineFile{
-	{ID: "1", FileName: "malware.exe", Date: time.Now().Format("02/01/2006 15:04"), Status: "Isolé", Signature: "Trojan.Generic"},
-}
+// Liste de fichiers en quarantaine vide
+var quarantineFiles = []QuarantineFile{}
 
 func main() {
 	// Initialiser le système de journalisation
@@ -86,7 +79,7 @@ func main() {
 
 	// Initialiser les templates
 	var err error
-	templates, err = loadTemplates("./templates")
+	templates, err = loadTemplates("./templates") // Chemin relatif depuis le dossier backend
 	if err != nil {
 		logEvent("Erreur lors du chargement des templates", map[string]interface{}{
 			"error": err.Error(),
@@ -98,14 +91,15 @@ func main() {
 	r := gin.Default()
 
 	// Middleware pour servir les fichiers statiques
-	r.Static("/static", "./static")
+	r.Static("/static", "./static") // ../
 
+	// Configurer les routes pour les pages
 	r.GET("/", renderDashboard)
-	r.GET("/analyse.html", renderAnalyse)
-	r.GET("/surveillance.html", renderSurveillance)
-	r.GET("/templates/historique.html", renderHistorique)
-	r.GET("/templates/quarantaine.html", renderQuarantaine)
-	r.GET("/templates/parametres.html", renderParametres)
+	r.GET("/analyse", renderAnalyse)
+	r.GET("/surveillance", renderSurveillance)
+	r.GET("/historique", renderHistorique)
+	r.GET("/quarantaine", renderQuarantaine)
+	r.GET("/parametres", renderParametres)
 
 	// Route pour uploader un fichier
 	r.POST("/upload", func(c *gin.Context) {
@@ -232,6 +226,7 @@ func main() {
 
 // Fonction pour rendre la page d'accueil
 func renderDashboard(c *gin.Context) {
+	fmt.Println("🔍 Rendu de la page d'accueil")
 	data := TemplateData{
 		Title:       "AVSecure - Tableau de bord",
 		ActivePage:  "dashboard",
