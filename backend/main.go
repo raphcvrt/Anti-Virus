@@ -103,9 +103,9 @@ func main() {
 	r.GET("/", renderDashboard)
 	r.GET("/analyse.html", renderAnalyse)
 	r.GET("/surveillance.html", renderSurveillance)
-	r.GET("/frontend/historique.html", renderHistorique)
-	r.GET("/frontend/quarantaine.html", renderQuarantaine)
-	r.GET("/frontend/parametres.html", renderParametres)
+	r.GET("/templates/historique.html", renderHistorique)
+	r.GET("/templates/quarantaine.html", renderQuarantaine)
+	r.GET("/templates/parametres.html", renderParametres)
 
 	// Route pour uploader un fichier
 	r.POST("/upload", func(c *gin.Context) {

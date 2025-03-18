@@ -15,3 +15,16 @@
 {"level":"info","msg":"Démarrage de l'application AVsecure","time":"2025-03-18T02:49:40+01:00"}
 {"level":"info","msg":"Démarrage de l'application AVsecure","time":"2025-03-18T02:50:00+01:00"}
 {"level":"info","msg":"Démarrage de l'application AVsecure","time":"2025-03-18T02:50:11+01:00"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-18T13:07:15+01:00"}
+{"error":"html/template: pattern matches no files: `templates/*.html`","level":"info","msg":"Erreur lors du chargement des templates","time":"2025-03-18T13:07:15+01:00"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-18T13:12:42+01:00"}
+{"error":"erreur lors du chargement des templates : html/template: pattern matches no files: `templates/*.html`","level":"info","msg":"Erreur lors du chargement des templates","time":"2025-03-18T13:12:42+01:00"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-18T13:15:05+01:00"}
+{"error":"erreur lors du chargement des templates : html/template: pattern matches no files: `templates/*.html`","level":"info","msg":"Erreur lors du chargement des templates","time":"2025-03-18T13:15:05+01:00"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-18T13:18:40+01:00"}
+{"error":"html/template: pattern matches no files: `templates/*.html`","level":"info","msg":"Erreur lors du chargement des templates","time":"2025-03-18T13:18:40+01:00"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-18T13:19:44+01:00"}
+{"error":"template: index.html:151: unexpected EOF","level":"info","msg":"Erreur lors du chargement des templates","time":"2025-03-18T13:19:44+01:00"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-18T13:20:58+01:00"}
+{"error":"template: index.html:151: unexpected EOF","level":"info","msg":"Erreur lors du chargement des templates","time":"2025-03-18T13:20:58+01:00"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-18T13:32:55+01:00"}

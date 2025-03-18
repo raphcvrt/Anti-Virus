@@ -35,7 +35,6 @@ func loadTemplates(templatesDir string) (*template.Template, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return tmpl, nil
 }
 
