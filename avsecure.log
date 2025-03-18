@@ -176,3 +176,36 @@
 {"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-18T22:03:49Z"}
 {"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-18T22:06:45Z"}
 {"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-18T22:11:05Z"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-18T22:42:09Z"}
+{"file":"/tmp/eicar.com","level":"info","msg":"Fichier analysé avec VirusTotal","result":"clean","time":"2025-03-18T22:44:20Z"}
+{"file":"/tmp/eicar.com","level":"info","msg":"Fichier analysé avec VirusTotal","result":"clean","time":"2025-03-18T22:44:20Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat de l'analyse VirusTotal","result":"clean","time":"2025-03-18T22:44:20Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat de l'analyse VirusTotal","result":"clean","time":"2025-03-18T22:44:20Z"}
+{"file":"/tmp/rendu.md","level":"info","msg":"Fichier analysé avec VirusTotal","result":"clean","time":"2025-03-18T22:44:25Z"}
+{"file":"rendu.md","level":"info","msg":"Résultat de l'analyse VirusTotal","result":"clean","time":"2025-03-18T22:44:25Z"}
+{"file":"/tmp/rendu.md","level":"info","msg":"Fichier analysé avec VirusTotal","result":"clean","time":"2025-03-18T22:44:25Z"}
+{"file":"rendu.md","level":"info","msg":"Résultat de l'analyse VirusTotal","result":"clean","time":"2025-03-18T22:44:25Z"}
+{"error":"signal: killed","file":"/tmp/rendu.md","level":"info","msg":"Erreur lors de l'analyse ClamAV","time":"2025-03-18T22:46:30Z"}
+{"error":"erreur ClamAV: erreur lors de l'analyse: ","file":"rendu.md","level":"info","msg":"Erreur lors de l'analyse","time":"2025-03-18T22:46:30Z"}
+{"file":"rendu.md","level":"info","msg":"Résultat final de l'analyse","result":"clean","time":"2025-03-18T22:46:30Z"}
+{"error":"une ou plusieurs analyses ont échoué: ClamAV: erreur ClamAV: erreur lors de l'analyse: , VirusTotal: \u003cnil\u003e","file":"rendu.md","level":"info","msg":"Erreur lors de l'analyse du fichier","time":"2025-03-18T22:46:30Z"}
+{"error":"signal: killed","file":"/tmp/rendu.md","level":"info","msg":"Erreur lors de l'analyse ClamAV","time":"2025-03-18T22:46:43Z"}
+{"error":"erreur ClamAV: erreur lors de l'analyse: ","file":"rendu.md","level":"info","msg":"Erreur lors de l'analyse","time":"2025-03-18T22:46:43Z"}
+{"file":"rendu.md","level":"info","msg":"Résultat final de l'analyse","result":"clean","time":"2025-03-18T22:46:43Z"}
+{"error":"une ou plusieurs analyses ont échoué: ClamAV: erreur ClamAV: erreur lors de l'analyse: , VirusTotal: \u003cnil\u003e","file":"rendu.md","level":"info","msg":"Erreur lors de l'analyse du fichier","time":"2025-03-18T22:46:43Z"}
+{"file":"/tmp/common.txt","level":"info","msg":"Fichier analysé avec VirusTotal","result":"clean","time":"2025-03-18T22:46:56Z"}
+{"file":"common.txt","level":"info","msg":"Résultat de l'analyse VirusTotal","result":"clean","time":"2025-03-18T22:46:56Z"}
+{"file":"/tmp/common.txt","level":"info","msg":"Fichier analysé avec VirusTotal","result":"clean","time":"2025-03-18T22:46:56Z"}
+{"file":"common.txt","level":"info","msg":"Résultat de l'analyse VirusTotal","result":"clean","time":"2025-03-18T22:46:56Z"}
+{"file":"/tmp/common.txt","level":"info","msg":"Fichier analysé avec ClamAV","result":"clean","time":"2025-03-18T22:47:01Z"}
+{"file":"common.txt","level":"info","msg":"Résultat de l'analyse ClamAV","result":"clean","time":"2025-03-18T22:47:01Z"}
+{"file":"common.txt","level":"info","msg":"Résultat final de l'analyse","result":"clean","time":"2025-03-18T22:47:01Z"}
+{"file":"/tmp/eicar.com","level":"info","msg":"Fichier infecté détecté","result":"infected","time":"2025-03-18T22:47:03Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat de l'analyse ClamAV","result":"infected","time":"2025-03-18T22:47:03Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat final de l'analyse","result":"infected","time":"2025-03-18T22:47:03Z"}
+{"file":"/tmp/eicar.com","level":"info","msg":"Fichier infecté détecté","result":"infected","time":"2025-03-18T22:47:03Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat de l'analyse ClamAV","result":"infected","time":"2025-03-18T22:47:03Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat final de l'analyse","result":"infected","time":"2025-03-18T22:47:03Z"}
+{"file":"/tmp/common.txt","level":"info","msg":"Fichier analysé avec ClamAV","result":"clean","time":"2025-03-18T22:47:03Z"}
+{"file":"common.txt","level":"info","msg":"Résultat de l'analyse ClamAV","result":"clean","time":"2025-03-18T22:47:03Z"}
+{"file":"common.txt","level":"info","msg":"Résultat final de l'analyse","result":"clean","time":"2025-03-18T22:47:03Z"}

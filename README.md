@@ -24,3 +24,6 @@ Ce projet est un **antivirus automatisé** qui surveille un repertoire spécifiq
 - Chiffrement des clés API.
 - securisation avancée du server
 - darkmode
+
+```go run backend/main.go backend/logger.go backend/scanner.go backend/templates.go``` 
+http://10.0.1.12:9555

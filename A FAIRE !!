@@ -1,4 +1,7 @@
-enlever surveillance, quarantaine, discord
-adapter
-lancer web et pas local host
-adapter pages html
+script sauvegarde
+gerer les pages annalyse et historique
+faire marcher le drag and drop
+supprimer la double upload
+ecran de chargement
+securisation du server
+endpoints "fichiers analysés" et "menaces détectées"
