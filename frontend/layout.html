@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .Title }}</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <span class="logo-icon"><i class="fas fa-shield-virus"></i></span>
+                AVSecure
+            </div>
+            <ul class="nav-links">
+                <li><a href="/index.html" class="{{ if eq .ActivePage "dashboard" }}active{{ end }}"><i class="fas fa-chart-line"></i> Tableau de bord</a></li>
+                <li><a href="/analyse.html" class="{{ if eq .ActivePage "analyse" }}active{{ end }}"><i class="fas fa-file-medical-alt"></i> Analyse de fichiers</a></li>
+                <li><a href="/surveillance.html" class="{{ if eq .ActivePage "surveillance" }}active{{ end }}"><i class="fas fa-folder-open"></i> Surveillance</a></li>
+                <li><a href="/frontend/historique.html" class="{{ if eq .ActivePage "historique" }}active{{ end }}"><i class="fas fa-history"></i> Historique</a></li>
+                <li><a href="/frontend/quarantaine.html" class="{{ if eq .ActivePage "quarantaine" }}active{{ end }}"><i class="fas fa-shield-alt"></i> Quarantaine</a></li>
+                <li><a href="/frontend/parametres.html" class="{{ if eq .ActivePage "parametres" }}active{{ end }}"><i class="fas fa-cog"></i> Paramètres</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            {{ if .FlashMessage }}
+            <div class="alert alert-info">
+                {{ .FlashMessage }}
+            </div>
+            {{ end }}
+            
+            {{ template "content" . }}
+
+            <footer>
+                <p>2025 Adam Benaïssa, Raphael Couvert, AVSecure - Protection en temps réel</p>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div class="toast-container" id="toast-container">
+        <!-- Toasts will be added dynamically -->
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chart.js/3.9.1/chart.min.js"></script>
+    <script src="/static/scripts.js"></script>
+</body>
+</html>

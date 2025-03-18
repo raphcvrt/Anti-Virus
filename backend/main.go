@@ -2,10 +2,12 @@ package main
 
 import (
 	"fmt"
+	"html/template"
 	"io"
 	"mime/multipart"
 	"net/http"
 	"os"
+	"path/filepath"
 	"strings"
 	"sync"
 	"time"
@@ -16,10 +18,12 @@ import (
 var (
 	watcherRunning bool
 	watcherMutex   sync.Mutex
+	templates      *template.Template
 )
 
-// Struct pour les données d'analyse
+// Structure pour les données d'analyse
 type ScanResult struct {
+	ID               string `json:"id"`
 	FileName         string `json:"file_name"`
 	Date             string `json:"date"`
 	ClamAVResult     string `json:"clamav_result"`
@@ -27,7 +31,7 @@ type ScanResult struct {
 	Status           string `json:"status"`
 }
 
-// Struct pour les statistiques
+// Structure pour les statistiques
 type Stats struct {
 	FilesScanned    int `json:"files_scanned"`
 	ThreatsDetected int `json:"threats_detected"`
@@ -35,10 +39,26 @@ type Stats struct {
 	ProtectionRate  int `json:"protection_rate"`
 }
 
+// Structure pour les dossiers surveillés
+type WatchedFolder struct {
+	Path      string `json:"path"`
+	Status    string `json:"status"`
+	StartDate string `json:"start_date"`
+}
+
+// Structure pour les fichiers en quarantaine
+type QuarantineFile struct {
+	ID        string `json:"id"`
+	FileName  string `json:"file_name"`
+	Date      string `json:"date"`
+	Status    string `json:"status"`
+	Signature string `json:"signature"`
+}
+
 // Données factices pour les analyses récentes (à remplacer par une base de données)
 var recentScans = []ScanResult{
-	{FileName: "document.pdf", Date: time.Now().Format("02/01/2006 15:04"), ClamAVResult: "Clean", VirusTotalResult: "Clean", Status: "Clean"},
-	{FileName: "setup.exe", Date: time.Now().Format("02/01/2006 15:04"), ClamAVResult: "Infected", VirusTotalResult: "Infected", Status: "Infected"},
+	{ID: "1", FileName: "document.pdf", Date: time.Now().Format("02/01/2006 15:04"), ClamAVResult: "Clean", VirusTotalResult: "Clean", Status: "Clean"},
+	{ID: "2", FileName: "setup.exe", Date: time.Now().Format("02/01/2006 15:04"), ClamAVResult: "Infected", VirusTotalResult: "Infected", Status: "Infected"},
 }
 
 // Données factices pour les statistiques (à remplacer par une base de données)
@@ -49,15 +69,43 @@ var stats = Stats{
 	ProtectionRate:  96,
 }
 
+// Données factices pour les dossiers surveillés
+var watchedFolders = []WatchedFolder{
+	{Path: "/home/user/documents", Status: "Active", StartDate: time.Now().Format("02/01/2006 15:04")},
+}
+
+// Données factices pour les fichiers en quarantaine
+var quarantineFiles = []QuarantineFile{
+	{ID: "1", FileName: "malware.exe", Date: time.Now().Format("02/01/2006 15:04"), Status: "Isolé", Signature: "Trojan.Generic"},
+}
+
 func main() {
 	// Initialiser le système de journalisation
 	initLogger()
-	logEvent("Démarrage de l'application AVsecure", nil)
+	logEvent("Démarrage de l'application AVSecure", nil)
 
+	// Initialiser les templates
+	var err error
+	templates, err = loadTemplates("./templates")
+	if err != nil {
+		logEvent("Erreur lors du chargement des templates", map[string]interface{}{
+			"error": err.Error(),
+		})
+		panic(err)
+	}
+
+	// Configurer le serveur Gin
 	r := gin.Default()
 
-	// Servir les fichiers statiques du frontend sous /static
-	r.Static("/static", "./frontend")
+	// Middleware pour servir les fichiers statiques
+	r.Static("/static", "./static")
+
+	r.GET("/", renderDashboard)
+	r.GET("/analyse.html", renderAnalyse)
+	r.GET("/surveillance.html", renderSurveillance)
+	r.GET("/frontend/historique.html", renderHistorique)
+	r.GET("/frontend/quarantaine.html", renderQuarantaine)
+	r.GET("/frontend/parametres.html", renderParametres)
 
 	// Route pour uploader un fichier
 	r.POST("/upload", func(c *gin.Context) {
@@ -115,6 +163,13 @@ func main() {
 			return
 		}
 
+		// Ajouter le dossier à la liste des dossiers surveillés
+		watchedFolders = append(watchedFolders, WatchedFolder{
+			Path:      req.FolderPath,
+			Status:    "Active",
+			StartDate: time.Now().Format("02/01/2006 15:04"),
+		})
+
 		logEvent("Surveillance démarrée", map[string]interface{}{
 			"folder": req.FolderPath,
 		})
@@ -123,6 +178,17 @@ func main() {
 
 	// Route pour arrêter la surveillance
 	r.POST("/stop-watch", func(c *gin.Context) {
+		var req struct {
+			FolderPath string `json:"folder_path"`
+		}
+		if err := c.ShouldBindJSON(&req); err != nil {
+			logEvent("Requête invalide pour arrêter la surveillance", map[string]interface{}{
+				"error": err.Error(),
+			})
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Requête invalide"})
+			return
+		}
+
 		if err := stopWatcher(); err != nil {
 			logEvent("Erreur lors de l'arrêt de la surveillance", map[string]interface{}{
 				"error": err.Error(),
@@ -131,32 +197,102 @@ func main() {
 			return
 		}
 
+		// Mettre à jour le statut du dossier
+		for i, folder := range watchedFolders {
+			if folder.Path == req.FolderPath {
+				watchedFolders[i].Status = "Inactive"
+				break
+			}
+		}
+
 		logEvent("Surveillance arrêtée", nil)
 		c.JSON(http.StatusOK, gin.H{"message": "Surveillance arrêtée"})
 	})
 
-	// Route pour servir la page d'accueil
-	r.GET("/", func(c *gin.Context) {
-		c.File("./frontend/index.html")
-	})
-
-	// Nouvelle route : Récupérer les analyses récentes
+	// Routes API pour les données
 	r.GET("/api/recent-scans", func(c *gin.Context) {
 		c.JSON(http.StatusOK, recentScans)
 	})
 
-	// Nouvelle route : Récupérer les statistiques
 	r.GET("/api/stats", func(c *gin.Context) {
 		c.JSON(http.StatusOK, stats)
+	})
+
+	r.GET("/api/watched-folders", func(c *gin.Context) {
+		c.JSON(http.StatusOK, watchedFolders)
+	})
+
+	r.GET("/api/quarantine-files", func(c *gin.Context) {
+		c.JSON(http.StatusOK, quarantineFiles)
 	})
 
 	// Démarrer le serveur
 	r.Run(":9555")
 }
 
+// Fonction pour rendre la page d'accueil
+func renderDashboard(c *gin.Context) {
+	data := TemplateData{
+		Title:       "AVSecure - Tableau de bord",
+		ActivePage:  "dashboard",
+		Stats:       stats,
+		RecentScans: recentScans,
+	}
+	renderTemplate(c.Writer, templates, "index.html", data)
+}
+
+// Fonction pour rendre la page d'analyse
+func renderAnalyse(c *gin.Context) {
+	data := TemplateData{
+		Title:      "AVSecure - Analyse de fichiers",
+		ActivePage: "analyse",
+	}
+	renderTemplate(c.Writer, templates, "analyse.html", data)
+}
+
+// Fonction pour rendre la page de surveillance
+func renderSurveillance(c *gin.Context) {
+	data := TemplateData{
+		Title:          "AVSecure - Surveillance",
+		ActivePage:     "surveillance",
+		WatchedFolders: watchedFolders,
+	}
+	renderTemplate(c.Writer, templates, "surveillance.html", data)
+}
+
+// Fonction pour rendre la page d'historique
+func renderHistorique(c *gin.Context) {
+	data := TemplateData{
+		Title:       "AVSecure - Historique",
+		ActivePage:  "historique",
+		RecentScans: recentScans,
+	}
+	renderTemplate(c.Writer, templates, "historique.html", data)
+}
+
+// Fonction pour rendre la page de quarantaine
+func renderQuarantaine(c *gin.Context) {
+	data := TemplateData{
+		Title:           "AVSecure - Quarantaine",
+		ActivePage:      "quarantaine",
+		QuarantineFiles: quarantineFiles,
+	}
+	renderTemplate(c.Writer, templates, "quarantaine.html", data)
+}
+
+// Fonction pour rendre la page de paramètres
+func renderParametres(c *gin.Context) {
+	data := TemplateData{
+		Title:      "AVSecure - Paramètres",
+		ActivePage: "parametres",
+	}
+	renderTemplate(c.Writer, templates, "parametres.html", data)
+}
+
+// Analyse d'un fichier
 func analyzeFile(file *multipart.FileHeader) (string, error) {
 	// Sauvegarder le fichier temporairement
-	filePath := "/tmp/" + file.Filename
+	filePath := filepath.Join(os.TempDir(), file.Filename)
 	fileData, err := file.Open()
 	if err != nil {
 		logEvent("Erreur lors de l'ouverture du fichier", map[string]interface{}{
@@ -248,6 +384,39 @@ func analyzeFile(file *multipart.FileHeader) (string, error) {
 		finalResult = "infected"
 	}
 
+	// Ajouter le résultat à la liste des analyses récentes
+	newScan := ScanResult{
+		ID:               fmt.Sprintf("%d", len(recentScans)+1),
+		FileName:         file.Filename,
+		Date:             time.Now().Format("02/01/2006 15:04"),
+		ClamAVResult:     clamAVResult,
+		VirusTotalResult: virusTotalResult,
+		Status:           finalResult,
+	}
+	recentScans = append([]ScanResult{newScan}, recentScans...)
+
+	// Mettre à jour les statistiques
+	stats.FilesScanned++
+	if finalResult == "infected" {
+		stats.ThreatsDetected++
+
+		// Ajouter à la quarantaine si infecté
+		quarantineFiles = append([]QuarantineFile{
+			{
+				ID:        fmt.Sprintf("%d", len(quarantineFiles)+1),
+				FileName:  file.Filename,
+				Date:      time.Now().Format("02/01/2006 15:04"),
+				Status:    "Isolé",
+				Signature: "Détecté par ClamAV et/ou VirusTotal",
+			},
+		}, quarantineFiles...)
+	}
+
+	// Calculer le taux de protection
+	if stats.FilesScanned > 0 {
+		stats.ProtectionRate = 100 - (stats.ThreatsDetected * 100 / stats.FilesScanned)
+	}
+
 	// Journaliser le résultat final
 	logEvent("Résultat final de l'analyse", map[string]interface{}{
 		"file":   file.Filename,
@@ -275,6 +444,9 @@ func startWatcher(folderPath string) error {
 	go watchFolder(folderPath)
 	watcherRunning = true
 
+	// Mettre à jour les statistiques
+	stats.WatchedFolders++
+
 	// Journaliser le démarrage de la surveillance
 	logEvent("Surveillance démarrée", map[string]interface{}{
 		"folder": folderPath,
@@ -293,6 +465,9 @@ func stopWatcher() error {
 	}
 
 	watcherRunning = false
+
+	// Mettre à jour les statistiques
+	stats.WatchedFolders--
 
 	// Journaliser l'arrêt de la surveillance
 	logEvent("Surveillance arrêtée", nil)

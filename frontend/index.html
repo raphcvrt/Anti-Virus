@@ -1,148 +1,133 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AVSecure - Dashboard</title>
-    <link rel="stylesheet" href="/static/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-</head>
-<body>
-    <div class="container">
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <div class="logo">
-                <span class="logo-icon"><i class="fas fa-shield-virus"></i></span>
-                AVSecure
+{{ define "content" }}
+<div class="header">
+    <h1>Tableau de bord</h1>
+    <div class="date" id="current-date">Chargement...</div>
+</div>
+
+<!-- Stats Cards -->
+<div class="dashboard-grid">
+    <div class="card">
+        <div class="card-header">
+            <span class="card-title">Fichiers analysés</span>
+            <div class="card-icon icon-primary">
+                <i class="fas fa-file-search"></i>
             </div>
-            <ul class="nav-links">
-                <li><a href="/index.html" id="dashboard-link"><i class="fas fa-chart-line"></i> Tableau de bord</a></li>
-                <li><a href="/analyse.html" id="analyse-link"><i class="fas fa-file-medical-alt"></i> Analyse de fichiers</a></li>
-                <li><a href="/surveillance.html" id="surveillance-link"><i class="fas fa-folder-open"></i> Surveillance</a></li>
-                <li><a href="/frontend/historique.html" id="historique-link"><i class="fas fa-history"></i> Historique</a></li>
-                <li><a href="/frontend/quarantaine.html" id="quarantaine-link"><i class="fas fa-shield-alt"></i> Quarantaine</a></li>
-                <li><a href="/frontend/parametres.html" id="parametres-link"><i class="fas fa-cog"></i> Paramètres</a></li>
-            </ul>
         </div>
+        <div class="card-value" id="files-scanned">{{ .Stats.FilesScanned }}</div>
+    </div>
 
-        <!-- Main Content -->
-        <div class="main-content">
-            <div class="header">
-                <h1>Tableau de bord</h1>
-                <div class="date" id="current-date">Chargement...</div>
+    <div class="card">
+        <div class="card-header">
+            <span class="card-title">Menaces détectées</span>
+            <div class="card-icon icon-danger">
+                <i class="fas fa-bug"></i>
             </div>
+        </div>
+        <div class="card-value" id="threats-detected">{{ .Stats.ThreatsDetected }}</div>
+    </div>
 
-            <!-- Stats Cards -->
-            <div class="dashboard-grid">
-                <div class="card">
-                    <div class="card-header">
-                        <span class="card-title">Fichiers analysés</span>
-                        <div class="card-icon icon-primary">
-                            <i class="fas fa-file-search"></i>
-                        </div>
-                    </div>
-                    <div class="card-value" id="files-scanned">0</div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <span class="card-title">Menaces détectées</span>
-                        <div class="card-icon icon-danger">
-                            <i class="fas fa-bug"></i>
-                        </div>
-                    </div>
-                    <div class="card-value" id="threats-detected">0</div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <span class="card-title">En surveillance</span>
-                        <div class="card-icon icon-warning">
-                            <i class="fas fa-folder"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <span class="card-title">Taux de protection</span>
-                        <div class="card-icon icon-success">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                    </div>
-                    <div class="card-value" id="protection-rate">0%</div>
-                </div>
+    <div class="card">
+        <div class="card-header">
+            <span class="card-title">En surveillance</span>
+            <div class="card-icon icon-warning">
+                <i class="fas fa-folder"></i>
             </div>
+        </div>
+        <div class="card-value" id="watched-folders">{{ .Stats.WatchedFolders }}</div>
+    </div>
 
-            <!-- Two column layout for upload and chart -->
-            <div class="dashboard-two-col">
-                <!-- Upload section -->
-                <div class="dashboard-section">
-                    <h2 class="section-title">Analyser un fichier</h2>
-                    <div class="file-upload-zone" id="dropzone">
-                        <div class="upload-icon">
-                            <i class="fas fa-cloud-upload-alt"></i>
-                        </div>
-                        <div class="upload-text">
-                            <p>Glissez-déposez un fichier ici</p>
-                            <p>ou</p>
-                        </div>
-                        <input type="file" id="file-input" style="display: none;" />
-                        <button class="upload-button" id="upload-button">Choisir un fichier</button>
-                    </div>
-                </div>
-
-                <!-- Chart section -->
-                <div class="dashboard-section">
-                    <h2 class="section-title">Activité récente</h2>
-                    <div class="table-container">
-                        <canvas id="activity-chart" class="chart-container"></canvas>
-                    </div>
-                </div>
+    <div class="card">
+        <div class="card-header">
+            <span class="card-title">Taux de protection</span>
+            <div class="card-icon icon-success">
+                <i class="fas fa-shield-alt"></i>
             </div>
+        </div>
+        <div class="card-value" id="protection-rate">{{ .Stats.ProtectionRate }}%</div>
+    </div>
+</div>
 
-            <!-- Watch Folder section -->
-            <div class="dashboard-section">
-                <h2 class="section-title">Surveillance de dossier</h2>
-                <div class="table-container">
-                    <p>Configurez un dossier à surveiller. AVSecure analysera automatiquement tout nouveau fichier.</p>
-                    <div class="folder-watch">
-                        <input type="text" class="folder-input" id="folder-path" placeholder="/chemin/vers/dossier" />
-                        <button class="watch-button" id="watch-button">Démarrer</button>
-                    </div>
-                    <div id="watch-status" style="margin-top: 10px; display: none;">
-                        <span class="spinner"></span> Surveillance active
-                    </div>
-                </div>
+<!-- Two column layout for upload and chart -->
+<div class="dashboard-two-col">
+    <!-- Upload section -->
+    <div class="dashboard-section">
+        <h2 class="section-title">Analyser un fichier</h2>
+        <div class="file-upload-zone" id="dropzone">
+            <div class="upload-icon">
+                <i class="fas fa-cloud-upload-alt"></i>
             </div>
-
-            <!-- Recent Scans table -->
-            <div class="dashboard-section">
-                <h2 class="section-title">Analyses récentes</h2>
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Nom du fichier</th>
-                                <th>Date</th>
-                                <th>ClamAV</th>
-                                <th>VirusTotal</th>
-                                <th>Statut</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="recent-scans">
-                            <!-- Les lignes seront ajoutées dynamiquement -->
-                        </tbody>
-                    </table>
-                </div>
+            <div class="upload-text">
+                <p>Glissez-déposez un fichier ici</p>
+                <p>ou</p>
             </div>
-
-            <footer>
-                <p>2025 Adam Benaïssa, Raphael Couvert, AVSecure - Protection en temps réel</p>
-            </footer>
+            <input type="file" id="file-input" style="display: none;" />
+            <button class="upload-button" id="upload-button">Choisir un fichier</button>
         </div>
     </div>
+
+    <!-- Chart section -->
+    <div class="dashboard-section">
+        <h2 class="section-title">Activité récente</h2>
+        <div class="table-container">
+            <canvas id="activity-chart" class="chart-container"></canvas>
+        </div>
+    </div>
+</div>
+
+<!-- Watch Folder section -->
+<div class="dashboard-section">
+    <h2 class="section-title">Surveillance de dossier</h2>
+    <div class="table-container">
+        <p>Configurez un dossier à surveiller. AVSecure analysera automatiquement tout nouveau fichier.</p>
+        <div class="folder-watch">
+            <input type="text" class="folder-input" id="folder-path" placeholder="/chemin/vers/dossier" />
+            <button class="watch-button" id="watch-button">Démarrer</button>
+        </div>
+        <div id="watch-status" style="margin-top: 10px; display: none;">
+            <span class="spinner"></span> Surveillance active
+        </div>
+    </div>
+</div>
+
+<!-- Recent Scans table -->
+<div class="dashboard-section">
+    <h2 class="section-title">Analyses récentes</h2>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nom du fichier</th>
+                    <th>Date</th>
+                    <th>ClamAV</th>
+                    <th>VirusTotal</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="recent-scans">
+                {{ range .RecentScans }}
+                <tr data-id="{{ .ID }}" class="{{ if eq .Status "infected" }}danger{{ end }}">
+                    <td>{{ .FileName }}</td>
+                    <td>{{ .Date }}</td>
+                    <td>{{ .ClamAVResult }}</td>
+                    <td>{{ .VirusTotalResult }}</td>
+                    <td class="{{ if eq .Status "infected" }}text-danger{{ else }}text-success{{ end }}">{{ .Status }}</td>
+                    <td>
+                        <button class="btn-icon view-details" data-id="{{ .ID }}">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        {{ if eq .Status "infected" }}
+                        <button class="btn-icon quarantine" data-id="{{ .ID }}">
+                            <i class="fas fa-shield-alt"></i>
+                        </button>
+                        {{ end }}
+                    </td>
+                </tr>
+                {{ end }}
+            </tbody>
+        </table>
+    </div>
+</div>
 
     <!-- Scan Details Modal -->
     <div id="scan-modal" class="modal">
