@@ -21,12 +21,14 @@ var (
 
 // Structure pour les données d'analyse
 type ScanResult struct {
-	ID               string `json:"id"`
-	FileName         string `json:"file_name"`
-	Date             string `json:"date"`
-	ClamAVResult     string `json:"clamav_result"`
-	VirusTotalResult string `json:"virustotal_result"`
-	Status           string `json:"status"`
+	ID                   string `json:"id"`
+	FileName             string `json:"file_name"`
+	Date                 string `json:"date"`
+	ClamAVResult         string `json:"clamav_result"`
+	VirusTotalResult     string `json:"virustotal_result"`
+	MetaDefenderResult   string `json:"metadefender_result"`   // Champ pour MetaDefender
+	HybridAnalysisResult string `json:"hybridanalysis_result"` // Champ pour Hybrid Analysis
+	Status               string `json:"status"`
 }
 
 // Structure pour les statistiques
@@ -138,8 +140,8 @@ func renderDashboard(c *gin.Context) {
 	data := TemplateData{
 		Title:       "AVSecure - Tableau de bord",
 		ActivePage:  "dashboard",
-		Stats:       stats,       // Assurez-vous que `stats` est bien défini
-		RecentScans: recentScans, // Assurez-vous que `recentScans` est bien défini
+		Stats:       stats,       // Statistiques
+		RecentScans: recentScans, // Analyses récentes
 	}
 	renderTemplate(c.Writer, templates, "index.html", data)
 }
@@ -184,6 +186,8 @@ func analyzeFile(file *multipart.FileHeader) (string, error) {
 	// Créer des canaux pour recevoir les résultats des analyses
 	clamAVChan := make(chan string)
 	virusTotalChan := make(chan string)
+	metaDefenderChan := make(chan string)
+	hybridAnalysisChan := make(chan string)
 	errChan := make(chan error)
 
 	// Démarrer les analyses en parallèle avec des goroutines
@@ -205,11 +209,29 @@ func analyzeFile(file *multipart.FileHeader) (string, error) {
 		virusTotalChan <- result
 	}()
 
-	// Attendre les résultats des deux analyses
-	var clamAVResult, virusTotalResult string
-	var clamAVErr, virusTotalErr error
+	go func() {
+		result, err := scanWithMetaDefender(filePath)
+		if err != nil {
+			errChan <- fmt.Errorf("erreur MetaDefender: %v", err)
+			return
+		}
+		metaDefenderChan <- result
+	}()
 
-	for i := 0; i < 2; i++ {
+	go func() {
+		result, err := scanWithHybridAnalysis(filePath)
+		if err != nil {
+			errChan <- fmt.Errorf("erreur Hybrid Analysis: %v", err)
+			return
+		}
+		hybridAnalysisChan <- result
+	}()
+
+	// Attendre les résultats des quatre analyses
+	var clamAVResult, virusTotalResult, metaDefenderResult, hybridAnalysisResult string
+	var clamAVErr, virusTotalErr, metaDefenderErr, hybridAnalysisErr error
+
+	for i := 0; i < 4; i++ {
 		select {
 		case result := <-clamAVChan:
 			clamAVResult = result
@@ -223,11 +245,27 @@ func analyzeFile(file *multipart.FileHeader) (string, error) {
 				"file":   file.Filename,
 				"result": result,
 			})
+		case result := <-metaDefenderChan:
+			metaDefenderResult = result
+			logEvent("Résultat de l'analyse MetaDefender", map[string]interface{}{
+				"file":   file.Filename,
+				"result": result,
+			})
+		case result := <-hybridAnalysisChan:
+			hybridAnalysisResult = result
+			logEvent("Résultat de l'analyse Hybrid Analysis", map[string]interface{}{
+				"file":   file.Filename,
+				"result": result,
+			})
 		case err := <-errChan:
 			if strings.Contains(err.Error(), "ClamAV") {
 				clamAVErr = err
-			} else {
+			} else if strings.Contains(err.Error(), "VirusTotal") {
 				virusTotalErr = err
+			} else if strings.Contains(err.Error(), "MetaDefender") {
+				metaDefenderErr = err
+			} else {
+				hybridAnalysisErr = err
 			}
 			logEvent("Erreur lors de l'analyse", map[string]interface{}{
 				"file":  file.Filename,
@@ -238,18 +276,20 @@ func analyzeFile(file *multipart.FileHeader) (string, error) {
 
 	// Déterminer le résultat final
 	finalResult := "clean"
-	if clamAVResult == "infected" || virusTotalResult == "infected" {
+	if clamAVResult == "infected" || virusTotalResult == "infected" || metaDefenderResult == "infected" || hybridAnalysisResult == "infected" {
 		finalResult = "infected"
 	}
 
 	// Ajouter le résultat à la liste des analyses récentes
 	newScan := ScanResult{
-		ID:               fmt.Sprintf("%d", len(recentScans)+1),
-		FileName:         file.Filename,
-		Date:             time.Now().Format("02/01/2006 15:04"),
-		ClamAVResult:     clamAVResult,
-		VirusTotalResult: virusTotalResult,
-		Status:           finalResult,
+		ID:                   fmt.Sprintf("%d", len(recentScans)+1),
+		FileName:             file.Filename,
+		Date:                 time.Now().Format("02/01/2006 15:04"),
+		ClamAVResult:         clamAVResult,
+		VirusTotalResult:     virusTotalResult,
+		MetaDefenderResult:   metaDefenderResult,   // Résultat de MetaDefender
+		HybridAnalysisResult: hybridAnalysisResult, // Résultat de Hybrid Analysis
+		Status:               finalResult,
 	}
 	recentScans = append([]ScanResult{newScan}, recentScans...)
 
@@ -265,9 +305,10 @@ func analyzeFile(file *multipart.FileHeader) (string, error) {
 	})
 
 	// Retourner une erreur si l'une des analyses a échoué
-	if clamAVErr != nil || virusTotalErr != nil {
-		return finalResult, fmt.Errorf("une ou plusieurs analyses ont échoué: ClamAV: %v, VirusTotal: %v", clamAVErr, virusTotalErr)
+	if clamAVErr != nil || virusTotalErr != nil || metaDefenderErr != nil || hybridAnalysisErr != nil {
+		return finalResult, fmt.Errorf("une ou plusieurs analyses ont échoué: ClamAV: %v, VirusTotal: %v, MetaDefender: %v, Hybrid Analysis: %v", clamAVErr, virusTotalErr, metaDefenderErr, hybridAnalysisErr)
 	}
+
 	// Mettre à jour les statistiques
 	stats.FilesScanned++
 	if finalResult == "infected" {
@@ -283,8 +324,16 @@ func analyzeFile(file *multipart.FileHeader) (string, error) {
 			"error": err.Error(),
 		})
 	}
-	return finalResult, nil
+	logEvent("Résultat de l'analyse MetaDefender", map[string]interface{}{
+		"file":   file.Filename,
+		"result": metaDefenderResult,
+	})
 
+	logEvent("Résultat de l'analyse Hybrid Analysis", map[string]interface{}{
+		"file":   file.Filename,
+		"result": hybridAnalysisResult,
+	})
+	return finalResult, nil
 }
 
 // Sauvegarder les données dans un fichier JSON

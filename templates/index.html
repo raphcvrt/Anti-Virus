@@ -70,6 +70,8 @@
                     <th>Date</th>
                     <th>ClamAV</th>
                     <th>VirusTotal</th>
+                    <th>MetaDefender</th>
+                    <th>Hybrid Analysis</th>
                     <th>Statut</th>
                 </tr>
             </thead>
@@ -80,14 +82,9 @@
                     <td>{{ .Date }}</td>
                     <td>{{ .ClamAVResult }}</td>
                     <td>{{ .VirusTotalResult }}</td>
+                    <td>{{ .MetaDefenderResult }}</td> <!-- Résultat de MetaDefender -->
+                    <td>{{ .HybridAnalysisResult }}</td> <!-- Résultat de Hybrid Analysis -->
                     <td class="{{ if eq .Status "infected" }}text-danger{{ else }}text-success{{ end }}">{{ .Status }}</td>
-                    <td>
-                        <button class="btn-icon view-details" data-id="{{ .ID }}">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                        {{ if eq .Status "infected" }}
-                        {{ end }}
-                    </td>
                 </tr>
                 {{ end }}
             </tbody>

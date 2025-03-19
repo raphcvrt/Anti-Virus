@@ -7,7 +7,7 @@ function fetchRecentScans() {
             
             // Si le tableau est vide, afficher un message
             if (data.length === 0) {
-                tableBody.innerHTML = '<tr><td colspan="6" class="text-center">Aucune analyse récente</td></tr>';
+                tableBody.innerHTML = '<tr><td colspan="7" class="text-center">Aucune analyse récente</td></tr>';
                 return;
             }
             
@@ -20,6 +20,8 @@ function fetchRecentScans() {
                     <td>${scan.date}</td>
                     <td>${scan.clamav_result}</td>
                     <td>${scan.virustotal_result}</td>
+                    <td>${scan.metadefender_result}</td> <!-- Résultat de MetaDefender -->
+                    <td>${scan.hybridanalysis_result}</td> <!-- Résultat de Hybrid Analysis -->
                     <td><span class="status-badge ${scan.status.toLowerCase() === 'clean' ? 'status-clean' : 'status-infected'}">${scan.status}</span></td>
                     <td><a href="#" class="view-details" data-id="${scan.id}"><i class="fas fa-eye"></i></a></td>
                 `;
@@ -30,7 +32,7 @@ function fetchRecentScans() {
             console.error('Erreur lors de la récupération des analyses récentes:', error);
             // En cas d'erreur, afficher un message
             const tableBody = document.getElementById('recent-scans');
-            tableBody.innerHTML = '<tr><td colspan="6" class="text-center">Erreur lors du chargement des analyses</td></tr>';
+            tableBody.innerHTML = '<tr><td colspan="7" class="text-center">Erreur lors du chargement des analyses</td></tr>';
         });
 }
 
