@@ -8,6 +8,7 @@ Ce projet est un **antivirus automatisé** qui surveille un repertoire spécifiq
 
 - Analyse en temps réel avec ClamAV et VirusTotal.
 - Journalisation structurée des événements.
+- server securisé avec (le procédé suivant)[https://github.com/raphcvrt/LINUX/blob/main/TP5/raphael_couvert.md]
 
 ### Efficacité
 
@@ -17,7 +18,7 @@ Ce projet est un **antivirus automatisé** qui surveille un repertoire spécifiq
 
 ### Technologies
 
-- **Bibliothèques** : Gin, Logrus, fsnotify, ClamAV, VirusTotal API.
+- **Bibliothèques** : Gin, fsnotify, ClamAV, VirusTotal API.
 
 ### Améliorations Possibles
 
