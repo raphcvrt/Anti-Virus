@@ -42,7 +42,6 @@ function fetchStats() {
             // Mettre à jour les cartes de statistiques
             document.getElementById('files-scanned').textContent = data.files_scanned;
             document.getElementById('threats-detected').textContent = data.threats_detected;
-            document.getElementById('watched-folders').textContent = data.watched_folders;
             document.getElementById('protection-rate').textContent = `${data.protection_rate}%`;
         })
         .catch(error => {
@@ -50,7 +49,6 @@ function fetchStats() {
             // En cas d'erreur, maintenir les valeurs à 0
             document.getElementById('files-scanned').textContent = '0';
             document.getElementById('threats-detected').textContent = '0';
-            document.getElementById('watched-folders').textContent = '0';
             document.getElementById('protection-rate').textContent = '0%';
         });
 }
@@ -153,7 +151,6 @@ function uploadFile(file) {
             console.error("Erreur lors de l'upload :", error);
             hideLoader();
             dropzone.classList.remove("uploading");
-            showToast("Une erreur s'est produite lors de l'upload.", "error");
         });
 }
 
@@ -298,5 +295,74 @@ document.addEventListener("DOMContentLoaded", function () {
                 }, 500);
             }
         }, false);
+    }
+});
+document.addEventListener('DOMContentLoaded', function () {
+    const uploadForm = document.querySelector('form'); // Sélectionnez votre formulaire d'upload
+    const loader = document.getElementById('loader');
+    const loadingText = document.getElementById('loading-text');
+
+    if (uploadForm) {
+        uploadForm.addEventListener('submit', function (e) {
+            // Afficher l'indicateur de chargement
+            loader.style.display = 'block';
+            loadingText.style.display = 'block';
+
+            // Optionnel : Désactiver le bouton d'upload pour éviter les soumissions multiples
+            const submitButton = uploadForm.querySelector('button[type="submit"]');
+            if (submitButton) {
+                submitButton.disabled = true;
+            }
+
+            // Vous pouvez également ajouter un délai pour simuler une attente avant la redirection
+            setTimeout(function () {
+                loader.style.display = 'none';
+                loadingText.style.display = 'none';
+                if (submitButton) {
+                    submitButton.disabled = false;
+                }
+            }, 5000); // Délai de 5 secondes (à ajuster selon vos besoins)
+        });
+    }
+});
+document.addEventListener('DOMContentLoaded', function () {
+    const uploadForm = document.querySelector('form'); // Sélectionnez votre formulaire d'upload
+    const loader = document.getElementById('loader');
+    const loadingText = document.getElementById('loading-text');
+
+    if (uploadForm) {
+        uploadForm.addEventListener('submit', function (e) {
+            e.preventDefault(); // Empêcher la soumission par défaut du formulaire
+
+            // Afficher l'indicateur de chargement
+            loader.style.display = 'block';
+            loadingText.style.display = 'block';
+
+            // Récupérer le fichier
+            const formData = new FormData(uploadForm);
+
+            // Envoyer le fichier via AJAX
+            fetch('/upload', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Masquer l'indicateur de chargement
+                loader.style.display = 'none';
+                loadingText.style.display = 'none';
+
+                // Afficher le résultat
+                alert(`Résultat de l'analyse : ${data.result}`);
+            })
+            .catch(error => {
+                // Masquer l'indicateur de chargement en cas d'erreur
+                loader.style.display = 'none';
+                loadingText.style.display = 'none';
+
+                console.error('Erreur lors de l\'upload:', error);
+                alert('Une erreur est survenue lors de l\'analyse du fichier.');
+            });
+        });
     }
 });

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"html/template"
 	"io"
@@ -32,7 +33,6 @@ type ScanResult struct {
 type Stats struct {
 	FilesScanned    int `json:"files_scanned"`
 	ThreatsDetected int `json:"threats_detected"`
-	WatchedFolders  int `json:"watched_folders"`
 	ProtectionRate  int `json:"protection_rate"`
 }
 
@@ -43,18 +43,34 @@ var recentScans = []ScanResult{}
 var stats = Stats{
 	FilesScanned:    0,
 	ThreatsDetected: 0,
-	WatchedFolders:  0,
 	ProtectionRate:  0,
 }
 
 func main() {
+	// Supprimer le fichier data.json au démarrage
+	if err := os.Remove("data.json"); err != nil {
+		if !os.IsNotExist(err) { // Ignorer l'erreur si le fichier n'existe pas
+			logEvent("Erreur lors de la suppression du fichier data.json", map[string]interface{}{
+				"error": err.Error(),
+			})
+			panic(err)
+		}
+	}
 	// Initialiser le système de journalisation
 	initLogger()
 	logEvent("Démarrage de l'application AVSecure", nil)
 
+	// Charger les données persistantes
+	if err := loadData(); err != nil {
+		logEvent("Erreur lors du chargement des données", map[string]interface{}{
+			"error": err.Error(),
+		})
+		panic(err)
+	}
+
 	// Initialiser les templates
 	var err error
-	templates, err = loadTemplates("./templates") // Chemin relatif depuis le dossier backend
+	templates, err = loadTemplates("./templates")
 	if err != nil {
 		logEvent("Erreur lors du chargement des templates", map[string]interface{}{
 			"error": err.Error(),
@@ -66,7 +82,7 @@ func main() {
 	r := gin.Default()
 
 	// Middleware pour servir les fichiers statiques
-	r.Static("/static", "./static") // ../
+	r.Static("/static", "./static")
 
 	// Configurer les routes pour les pages
 	r.GET("/", renderDashboard)
@@ -93,6 +109,13 @@ func main() {
 			return
 		}
 
+		// Sauvegarder les données après chaque analyse
+		if err := saveData(); err != nil {
+			logEvent("Erreur lors de la sauvegarde des données", map[string]interface{}{
+				"error": err.Error(),
+			})
+		}
+
 		c.JSON(http.StatusOK, gin.H{"filename": file.Filename, "result": result})
 	})
 
@@ -115,14 +138,17 @@ func renderDashboard(c *gin.Context) {
 	data := TemplateData{
 		Title:       "AVSecure - Tableau de bord",
 		ActivePage:  "dashboard",
-		Stats:       stats,
-		RecentScans: recentScans,
+		Stats:       stats,       // Assurez-vous que `stats` est bien défini
+		RecentScans: recentScans, // Assurez-vous que `recentScans` est bien défini
 	}
 	renderTemplate(c.Writer, templates, "index.html", data)
 }
 
 // Analyse d'un fichier
 func analyzeFile(file *multipart.FileHeader) (string, error) {
+	logEvent("Début de l'analyse du fichier", map[string]interface{}{
+		"file": file.Filename,
+	})
 	// Sauvegarder le fichier temporairement
 	filePath := filepath.Join(os.TempDir(), file.Filename)
 	fileData, err := file.Open()
@@ -227,12 +253,6 @@ func analyzeFile(file *multipart.FileHeader) (string, error) {
 	}
 	recentScans = append([]ScanResult{newScan}, recentScans...)
 
-	// Mettre à jour les statistiques
-	stats.FilesScanned++
-	if finalResult == "infected" {
-		stats.ThreatsDetected++
-	}
-
 	// Calculer le taux de protection
 	if stats.FilesScanned > 0 {
 		stats.ProtectionRate = 100 - (stats.ThreatsDetected * 100 / stats.FilesScanned)
@@ -248,6 +268,78 @@ func analyzeFile(file *multipart.FileHeader) (string, error) {
 	if clamAVErr != nil || virusTotalErr != nil {
 		return finalResult, fmt.Errorf("une ou plusieurs analyses ont échoué: ClamAV: %v, VirusTotal: %v", clamAVErr, virusTotalErr)
 	}
+	// Mettre à jour les statistiques
+	stats.FilesScanned++
+	if finalResult == "infected" {
+		stats.ThreatsDetected++
+	}
+	if stats.FilesScanned > 0 {
+		stats.ProtectionRate = 100 - (stats.ThreatsDetected * 100 / stats.FilesScanned)
+	}
 
+	// Sauvegarder les données
+	if err := saveData(); err != nil {
+		logEvent("Erreur lors de la sauvegarde des données", map[string]interface{}{
+			"error": err.Error(),
+		})
+	}
 	return finalResult, nil
+
+}
+
+// Sauvegarder les données dans un fichier JSON
+func saveData() error {
+	data := struct {
+		Stats       Stats
+		RecentScans []ScanResult
+	}{
+		Stats:       stats,
+		RecentScans: recentScans,
+	}
+
+	file, err := os.Create("data.json")
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+
+	encoder := json.NewEncoder(file)
+	return encoder.Encode(data)
+}
+
+func loadData() error {
+	file, err := os.Open("data.json")
+	if err != nil {
+		if os.IsNotExist(err) {
+			stats = Stats{
+				FilesScanned:    0,
+				ThreatsDetected: 0,
+				ProtectionRate:  0,
+			}
+			recentScans = []ScanResult{}
+			return nil
+		}
+		return err
+	}
+	defer file.Close()
+
+	data := struct {
+		Stats       Stats
+		RecentScans []ScanResult
+	}{}
+
+	decoder := json.NewDecoder(file)
+	if err := decoder.Decode(&data); err != nil {
+		return err
+	}
+
+	stats = data.Stats
+	recentScans = data.RecentScans
+
+	logEvent("Données chargées", map[string]interface{}{
+		"stats":       stats,
+		"recentScans": recentScans,
+	})
+
+	return nil
 }

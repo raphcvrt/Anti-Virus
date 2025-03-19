@@ -225,3 +225,106 @@
 {"file":"/tmp/eicar.com","level":"info","msg":"Fichier analysé avec VirusTotal","result":"clean","time":"2025-03-19T09:15:31Z"}
 {"file":"eicar.com","level":"info","msg":"Résultat de l'analyse VirusTotal","result":"clean","time":"2025-03-19T09:15:31Z"}
 {"file":"eicar.com","level":"info","msg":"Résultat final de l'analyse","result":"infected","time":"2025-03-19T09:15:31Z"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-19T09:25:30Z"}
+{"file":"/tmp/eicar.com","level":"info","msg":"Fichier infecté détecté","result":"infected","time":"2025-03-19T09:26:03Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat de l'analyse ClamAV","result":"infected","time":"2025-03-19T09:26:03Z"}
+{"file":"/tmp/eicar.com","level":"info","msg":"Fichier infecté détecté","result":"infected","time":"2025-03-19T09:26:04Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat de l'analyse ClamAV","result":"infected","time":"2025-03-19T09:26:04Z"}
+{"file":"/tmp/eicar.com","level":"info","msg":"Fichier infecté détecté par VirusTotal","result":"infected","time":"2025-03-19T09:26:22Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat de l'analyse VirusTotal","result":"infected","time":"2025-03-19T09:26:22Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat final de l'analyse","result":"infected","time":"2025-03-19T09:26:22Z"}
+{"file":"/tmp/eicar.com","level":"info","msg":"Fichier infecté détecté par VirusTotal","result":"infected","time":"2025-03-19T09:26:22Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat de l'analyse VirusTotal","result":"infected","time":"2025-03-19T09:26:22Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat final de l'analyse","result":"infected","time":"2025-03-19T09:26:22Z"}
+{"file":"/tmp/key.txt","level":"info","msg":"Fichier analysé avec ClamAV","result":"clean","time":"2025-03-19T09:26:27Z"}
+{"file":"key.txt","level":"info","msg":"Résultat de l'analyse ClamAV","result":"clean","time":"2025-03-19T09:26:27Z"}
+{"file":"/tmp/key.txt","level":"info","msg":"Fichier analysé avec ClamAV","result":"clean","time":"2025-03-19T09:26:27Z"}
+{"file":"key.txt","level":"info","msg":"Résultat de l'analyse ClamAV","result":"clean","time":"2025-03-19T09:26:27Z"}
+{"file":"/tmp/key.txt","level":"info","msg":"Fichier analysé avec VirusTotal","result":"clean","time":"2025-03-19T09:26:43Z"}
+{"file":"key.txt","level":"info","msg":"Résultat de l'analyse VirusTotal","result":"clean","time":"2025-03-19T09:26:43Z"}
+{"file":"key.txt","level":"info","msg":"Résultat final de l'analyse","result":"clean","time":"2025-03-19T09:26:43Z"}
+{"file":"/tmp/key.txt","level":"info","msg":"Fichier analysé avec VirusTotal","result":"clean","time":"2025-03-19T09:26:43Z"}
+{"file":"key.txt","level":"info","msg":"Résultat de l'analyse VirusTotal","result":"clean","time":"2025-03-19T09:26:43Z"}
+{"file":"key.txt","level":"info","msg":"Résultat final de l'analyse","result":"clean","time":"2025-03-19T09:26:43Z"}
+{"file":"/tmp/eicar.com","level":"info","msg":"Fichier infecté détecté","result":"infected","time":"2025-03-19T09:27:53Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat de l'analyse ClamAV","result":"infected","time":"2025-03-19T09:27:53Z"}
+{"file":"/tmp/eicar.com","level":"info","msg":"Fichier infecté détecté par VirusTotal","result":"infected","time":"2025-03-19T09:28:10Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat de l'analyse VirusTotal","result":"infected","time":"2025-03-19T09:28:10Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat final de l'analyse","result":"infected","time":"2025-03-19T09:28:10Z"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-19T09:38:04Z"}
+{"file":"/tmp/eicar.com","level":"info","msg":"Fichier infecté détecté","result":"infected","time":"2025-03-19T09:38:30Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat de l'analyse ClamAV","result":"infected","time":"2025-03-19T09:38:30Z"}
+{"file":"/tmp/eicar.com","level":"info","msg":"Fichier analysé avec VirusTotal","result":"clean","time":"2025-03-19T09:38:48Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat de l'analyse VirusTotal","result":"clean","time":"2025-03-19T09:38:48Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat final de l'analyse","result":"infected","time":"2025-03-19T09:38:48Z"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-19T09:40:49Z"}
+{"file":"/tmp/eicar.com","level":"info","msg":"Fichier infecté détecté","result":"infected","time":"2025-03-19T09:41:14Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat de l'analyse ClamAV","result":"infected","time":"2025-03-19T09:41:14Z"}
+{"file":"/tmp/eicar.com","level":"info","msg":"Fichier infecté détecté par VirusTotal","result":"infected","time":"2025-03-19T09:41:32Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat de l'analyse VirusTotal","result":"infected","time":"2025-03-19T09:41:32Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat final de l'analyse","result":"infected","time":"2025-03-19T09:41:32Z"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-19T09:51:30Z"}
+{"file":"eicar.com","level":"info","msg":"Début de l'analyse du fichier","time":"2025-03-19T09:51:38Z"}
+{"file":"/tmp/eicar.com","level":"info","msg":"Fichier infecté détecté","result":"infected","time":"2025-03-19T09:51:51Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat de l'analyse ClamAV","result":"infected","time":"2025-03-19T09:51:51Z"}
+{"file":"/tmp/eicar.com","level":"info","msg":"Fichier infecté détecté par VirusTotal","result":"infected","time":"2025-03-19T09:52:11Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat de l'analyse VirusTotal","result":"infected","time":"2025-03-19T09:52:11Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat final de l'analyse","result":"infected","time":"2025-03-19T09:52:11Z"}
+{"file":"rendu.md","level":"info","msg":"Début de l'analyse du fichier","time":"2025-03-19T09:52:51Z"}
+{"file":"/tmp/rendu.md","level":"info","msg":"Fichier analysé avec ClamAV","result":"clean","time":"2025-03-19T09:53:05Z"}
+{"file":"rendu.md","level":"info","msg":"Résultat de l'analyse ClamAV","result":"clean","time":"2025-03-19T09:53:05Z"}
+{"file":"/tmp/rendu.md","level":"info","msg":"Fichier analysé avec VirusTotal","result":"clean","time":"2025-03-19T09:53:24Z"}
+{"file":"rendu.md","level":"info","msg":"Résultat de l'analyse VirusTotal","result":"clean","time":"2025-03-19T09:53:24Z"}
+{"file":"rendu.md","level":"info","msg":"Résultat final de l'analyse","result":"clean","time":"2025-03-19T09:53:24Z"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-19T10:03:08Z"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-19T10:12:26Z"}
+{"file":"eicar.com","level":"info","msg":"Début de l'analyse du fichier","time":"2025-03-19T10:12:36Z"}
+{"file":"/tmp/eicar.com","level":"info","msg":"Fichier infecté détecté","result":"infected","time":"2025-03-19T10:12:49Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat de l'analyse ClamAV","result":"infected","time":"2025-03-19T10:12:49Z"}
+{"file":"/tmp/eicar.com","level":"info","msg":"Fichier analysé avec VirusTotal","result":"clean","time":"2025-03-19T10:13:07Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat de l'analyse VirusTotal","result":"clean","time":"2025-03-19T10:13:07Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat final de l'analyse","result":"infected","time":"2025-03-19T10:13:07Z"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-19T10:22:06Z"}
+{"file":"eicar.com","level":"info","msg":"Début de l'analyse du fichier","time":"2025-03-19T10:22:14Z"}
+{"file":"/tmp/eicar.com","level":"info","msg":"Fichier infecté détecté","result":"infected","time":"2025-03-19T10:22:28Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat de l'analyse ClamAV","result":"infected","time":"2025-03-19T10:22:28Z"}
+{"file":"/tmp/eicar.com","level":"info","msg":"Fichier analysé avec VirusTotal","result":"clean","time":"2025-03-19T10:22:47Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat de l'analyse VirusTotal","result":"clean","time":"2025-03-19T10:22:47Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat final de l'analyse","result":"infected","time":"2025-03-19T10:22:47Z"}
+{"file":"rendu.md","level":"info","msg":"Début de l'analyse du fichier","time":"2025-03-19T10:23:18Z"}
+{"file":"/tmp/rendu.md","level":"info","msg":"Fichier analysé avec ClamAV","result":"clean","time":"2025-03-19T10:23:32Z"}
+{"file":"rendu.md","level":"info","msg":"Résultat de l'analyse ClamAV","result":"clean","time":"2025-03-19T10:23:32Z"}
+{"file":"/tmp/rendu.md","level":"info","msg":"Fichier analysé avec VirusTotal","result":"clean","time":"2025-03-19T10:23:49Z"}
+{"file":"rendu.md","level":"info","msg":"Résultat de l'analyse VirusTotal","result":"clean","time":"2025-03-19T10:23:49Z"}
+{"file":"rendu.md","level":"info","msg":"Résultat final de l'analyse","result":"clean","time":"2025-03-19T10:23:49Z"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-19T10:24:07Z"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-19T10:39:45Z"}
+{"level":"info","msg":"Données chargées","recentScans":[{"id":"2","file_name":"rendu.md","date":"19/03/2025 10:23","clamav_result":"clean","virustotal_result":"clean","status":"clean"},{"id":"1","file_name":"eicar.com","date":"19/03/2025 10:22","clamav_result":"infected","virustotal_result":"clean","status":"infected"}],"stats":{"files_scanned":4,"threats_detected":2,"protection_rate":50},"time":"2025-03-19T10:39:45Z"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-19T10:40:03Z"}
+{"level":"info","msg":"Données chargées","recentScans":[{"id":"2","file_name":"rendu.md","date":"19/03/2025 10:23","clamav_result":"clean","virustotal_result":"clean","status":"clean"},{"id":"1","file_name":"eicar.com","date":"19/03/2025 10:22","clamav_result":"infected","virustotal_result":"clean","status":"infected"}],"stats":{"files_scanned":4,"threats_detected":2,"protection_rate":50},"time":"2025-03-19T10:40:03Z"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-19T10:48:21Z"}
+{"file":"eicar.com","level":"info","msg":"Début de l'analyse du fichier","time":"2025-03-19T10:48:33Z"}
+{"file":"/tmp/eicar.com","level":"info","msg":"Fichier infecté détecté","result":"infected","time":"2025-03-19T10:48:47Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat de l'analyse ClamAV","result":"infected","time":"2025-03-19T10:48:47Z"}
+{"file":"/tmp/eicar.com","level":"info","msg":"Fichier analysé avec VirusTotal","result":"clean","time":"2025-03-19T10:49:16Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat de l'analyse VirusTotal","result":"clean","time":"2025-03-19T10:49:16Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat final de l'analyse","result":"infected","time":"2025-03-19T10:49:16Z"}
+{"file":"rendu.md","level":"info","msg":"Début de l'analyse du fichier","time":"2025-03-19T10:50:13Z"}
+{"file":"/tmp/rendu.md","level":"info","msg":"Fichier analysé avec ClamAV","result":"clean","time":"2025-03-19T10:50:26Z"}
+{"file":"rendu.md","level":"info","msg":"Résultat de l'analyse ClamAV","result":"clean","time":"2025-03-19T10:50:26Z"}
+{"file":"/tmp/rendu.md","level":"info","msg":"Fichier analysé avec VirusTotal","result":"clean","time":"2025-03-19T10:50:45Z"}
+{"file":"rendu.md","level":"info","msg":"Résultat de l'analyse VirusTotal","result":"clean","time":"2025-03-19T10:50:45Z"}
+{"file":"rendu.md","level":"info","msg":"Résultat final de l'analyse","result":"clean","time":"2025-03-19T10:50:45Z"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-19T10:52:35Z"}
+{"file":"eicar.com","level":"info","msg":"Début de l'analyse du fichier","time":"2025-03-19T10:52:44Z"}
+{"file":"/tmp/eicar.com","level":"info","msg":"Fichier infecté détecté","result":"infected","time":"2025-03-19T10:52:57Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat de l'analyse ClamAV","result":"infected","time":"2025-03-19T10:52:57Z"}
+{"file":"/tmp/eicar.com","level":"info","msg":"Fichier analysé avec VirusTotal","result":"clean","time":"2025-03-19T10:53:15Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat de l'analyse VirusTotal","result":"clean","time":"2025-03-19T10:53:15Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat final de l'analyse","result":"infected","time":"2025-03-19T10:53:15Z"}
+{"file":"rendu.md","level":"info","msg":"Début de l'analyse du fichier","time":"2025-03-19T10:53:26Z"}
+{"file":"/tmp/rendu.md","level":"info","msg":"Fichier analysé avec ClamAV","result":"clean","time":"2025-03-19T10:53:40Z"}
+{"file":"rendu.md","level":"info","msg":"Résultat de l'analyse ClamAV","result":"clean","time":"2025-03-19T10:53:40Z"}
+{"file":"/tmp/rendu.md","level":"info","msg":"Fichier analysé avec VirusTotal","result":"clean","time":"2025-03-19T10:53:57Z"}
+{"file":"rendu.md","level":"info","msg":"Résultat de l'analyse VirusTotal","result":"clean","time":"2025-03-19T10:53:57Z"}
+{"file":"rendu.md","level":"info","msg":"Résultat final de l'analyse","result":"clean","time":"2025-03-19T10:53:57Z"}
