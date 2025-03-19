@@ -210,3 +210,6 @@
 {"file":"common.txt","level":"info","msg":"Résultat de l'analyse ClamAV","result":"clean","time":"2025-03-18T22:47:03Z"}
 {"file":"common.txt","level":"info","msg":"Résultat final de l'analyse","result":"clean","time":"2025-03-18T22:47:03Z"}
 {"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-19T08:23:34Z"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-19T09:04:38Z"}
+{"error":"open templates/analyse.html: no such file or directory","level":"info","msg":"Erreur lors du chargement des templates","time":"2025-03-19T09:04:38Z"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-19T09:05:39Z"}

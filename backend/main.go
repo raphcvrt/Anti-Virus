@@ -70,8 +70,6 @@ func main() {
 
 	// Configurer les routes pour les pages
 	r.GET("/", renderDashboard)
-	r.GET("/analyse", renderAnalyse)
-	r.GET("/historique", renderHistorique)
 
 	// Route pour uploader un fichier
 	r.POST("/upload", func(c *gin.Context) {
@@ -121,25 +119,6 @@ func renderDashboard(c *gin.Context) {
 		RecentScans: recentScans,
 	}
 	renderTemplate(c.Writer, templates, "index.html", data)
-}
-
-// Fonction pour rendre la page d'analyse
-func renderAnalyse(c *gin.Context) {
-	data := TemplateData{
-		Title:      "AVSecure - Analyse de fichiers",
-		ActivePage: "analyse",
-	}
-	renderTemplate(c.Writer, templates, "analyse.html", data)
-}
-
-// Fonction pour rendre la page d'historique
-func renderHistorique(c *gin.Context) {
-	data := TemplateData{
-		Title:       "AVSecure - Historique",
-		ActivePage:  "historique",
-		RecentScans: recentScans,
-	}
-	renderTemplate(c.Writer, templates, "historique.html", data)
 }
 
 // Analyse d'un fichier

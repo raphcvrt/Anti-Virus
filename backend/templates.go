@@ -40,8 +40,6 @@ func loadTemplates(templatesDir string) (*template.Template, error) {
 	// Charger tous les templates de contenu
 	contentTemplates := []string{
 		filepath.Join(templatesDir, "index.html"),
-		filepath.Join(templatesDir, "analyse.html"),
-		filepath.Join(templatesDir, "historique.html"),
 	}
 
 	tmpl, err = tmpl.ParseFiles(contentTemplates...)
