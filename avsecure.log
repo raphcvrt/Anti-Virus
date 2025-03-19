@@ -209,3 +209,4 @@
 {"file":"/tmp/common.txt","level":"info","msg":"Fichier analysé avec ClamAV","result":"clean","time":"2025-03-18T22:47:03Z"}
 {"file":"common.txt","level":"info","msg":"Résultat de l'analyse ClamAV","result":"clean","time":"2025-03-18T22:47:03Z"}
 {"file":"common.txt","level":"info","msg":"Résultat final de l'analyse","result":"clean","time":"2025-03-18T22:47:03Z"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-19T08:23:34Z"}
