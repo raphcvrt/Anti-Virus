@@ -840,3 +840,127 @@ tr.danger {
 [data-theme="dark"] tr.danger {
     background-color: rgba(231, 76, 60, 0.15);
 }
+/* Styles pour l'indicateur de chargement */
+.loading-animation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.loading-animation i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.loading-animation p {
+    font-size: 1.2rem;
+    color: var(--text-color);
+}
+
+.fa-spin {
+    animation: fa-spin 2s infinite linear;
+}
+
+@keyframes fa-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Styles pour les notifications toast */
+.toast-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.toast {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--card-bg);
+    border-left: 4px solid var(--primary-color);
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 12px 15px;
+    min-width: 300px;
+    max-width: 450px;
+    transform: translateX(120%);
+    transition: transform 0.3s ease;
+    overflow: hidden;
+}
+
+.toast-visible {
+    transform: translateX(0);
+}
+
+.toast-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.toast-content i {
+    font-size: 1.2rem;
+}
+
+.toast-close {
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.toast-close:hover {
+    opacity: 1;
+}
+
+.toast-success {
+    border-left-color: #28a745;
+}
+
+.toast-success i {
+    color: #28a745;
+}
+
+.toast-error {
+    border-left-color: #dc3545;
+}
+
+.toast-error i {
+    color: #dc3545;
+}
+
+.toast-info {
+    border-left-color: var(--primary-color);
+}
+
+.toast-info i {
+    color: var(--primary-color);
+}
+
+/* Amélioration des styles du drag and drop */
+.file-upload-zone {
+    position: relative;
+    min-height: 200px;
+}
+
+.file-upload-zone.dragover {
+    border-color: var(--primary-color);
+    background-color: rgba(var(--primary-rgb), 0.05);
+}
+
+.upload-button {
+    position: relative;
+    z-index: 2;
+}

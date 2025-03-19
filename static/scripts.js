@@ -88,6 +88,113 @@ function initializeTheme() {
     }
 }
 
+// Afficher l'indicateur de chargement
+function showLoader() {
+    const dropzone = document.getElementById("dropzone");
+    
+    // Sauvegarder le contenu original
+    if (!dropzone.getAttribute('data-original-content')) {
+        dropzone.setAttribute('data-original-content', dropzone.innerHTML);
+    }
+    
+    // Afficher l'indicateur de chargement
+    dropzone.innerHTML = `
+        <div class="loading-animation">
+            <i class="fas fa-shield-virus fa-spin"></i>
+            <p>Analyse en cours...</p>
+        </div>
+    `;
+}
+
+// Masquer l'indicateur de chargement
+function hideLoader() {
+    const dropzone = document.getElementById("dropzone");
+    const originalContent = dropzone.getAttribute('data-original-content');
+    
+    if (originalContent) {
+        dropzone.innerHTML = originalContent;
+    }
+}
+
+// Fonction pour envoyer le fichier au backend
+function uploadFile(file) {
+    // Vérifier si un fichier est déjà en cours d'analyse
+    if (document.getElementById("dropzone").classList.contains("uploading")) {
+        return;
+    }
+    
+    const dropzone = document.getElementById("dropzone");
+    dropzone.classList.add("uploading");
+    
+    showLoader();
+    
+    const formData = new FormData();
+    formData.append("file", file);
+
+    fetch("/upload", {
+        method: "POST",
+        body: formData,
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            hideLoader();
+            dropzone.classList.remove("uploading");
+            
+            if (data.error) {
+                showToast("Erreur : " + data.error, "error");
+            } else {
+                showToast("Fichier analysé : " + data.result, "success");
+                // Actualiser les données sans recharger la page
+                fetchRecentScans();
+                fetchStats();
+            }
+        })
+        .catch((error) => {
+            console.error("Erreur lors de l'upload :", error);
+            hideLoader();
+            dropzone.classList.remove("uploading");
+            showToast("Une erreur s'est produite lors de l'upload.", "error");
+        });
+}
+
+// Afficher une notification toast
+function showToast(message, type = "info") {
+    const container = document.getElementById("toast-container");
+    const toast = document.createElement("div");
+    toast.className = `toast toast-${type}`;
+    toast.innerHTML = `
+        <div class="toast-content">
+            <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i>
+            <span>${message}</span>
+        </div>
+        <i class="fas fa-times toast-close"></i>
+    `;
+    
+    container.appendChild(toast);
+    
+    // Animation d'entrée
+    setTimeout(() => {
+        toast.classList.add("toast-visible");
+    }, 10);
+    
+    // Fermeture automatique après 5 secondes
+    setTimeout(() => {
+        toast.classList.remove("toast-visible");
+        setTimeout(() => {
+            container.removeChild(toast);
+        }, 300);
+    }, 5000);
+    
+    // Fermeture manuelle
+    const closeBtn = toast.querySelector(".toast-close");
+    closeBtn.addEventListener("click", () => {
+        toast.classList.remove("toast-visible");
+        setTimeout(() => {
+            container.removeChild(toast);
+        }, 300);
+    });
+}
+
 // Initialisation du dashboard
 document.addEventListener('DOMContentLoaded', function() {
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -111,62 +218,85 @@ document.addEventListener("DOMContentLoaded", function () {
     const dropzone = document.getElementById("dropzone");
     const fileInput = document.getElementById("file-input");
     const uploadButton = document.getElementById("upload-button");
+    
+    // Variable pour suivre si un upload est en cours
+    let isUploading = false;
 
     // Gérer le clic sur le bouton "Choisir un fichier"
-    uploadButton.addEventListener("click", function () {
-        fileInput.click(); // Déclencher le sélecteur de fichiers
-    });
+    if (uploadButton) {
+        uploadButton.addEventListener("click", function (e) {
+            e.preventDefault(); // Empêcher la soumission du formulaire
+            e.stopPropagation(); // Empêcher la propagation du clic
+            
+            // Éviter les clics multiples
+            if (isUploading) return;
+            
+            fileInput.click(); // Déclencher le sélecteur de fichiers
+        });
+    }
 
     // Gérer la sélection de fichiers
-    fileInput.addEventListener("change", function (e) {
-        const file = e.target.files[0];
-        if (file) {
-            uploadFile(file);
-        }
-    });
+    if (fileInput) {
+        fileInput.addEventListener("change", function (e) {
+            const file = e.target.files[0];
+            if (file && !isUploading) {
+                isUploading = true;
+                uploadFile(file);
+                
+                // Réinitialiser la valeur pour permettre de sélectionner le même fichier à nouveau
+                fileInput.value = '';
+                
+                // Réinitialiser le drapeau après un délai
+                setTimeout(() => {
+                    isUploading = false;
+                }, 500);
+            }
+        });
+    }
 
     // Gérer le glisser-déposer
-    dropzone.addEventListener("dragover", function (e) {
-        e.preventDefault();
-        dropzone.classList.add("dragover");
-    });
-
-    dropzone.addEventListener("dragleave", function () {
-        dropzone.classList.remove("dragover");
-    });
-
-    dropzone.addEventListener("drop", function (e) {
-        e.preventDefault();
-        dropzone.classList.remove("dragover");
-
-        const file = e.dataTransfer.files[0];
-        if (file) {
-            uploadFile(file);
+    if (dropzone) {
+        // Empêcher le comportement par défaut du navigateur
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropzone.addEventListener(eventName, preventDefaults, false);
+            document.body.addEventListener(eventName, preventDefaults, false);
+        });
+        
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
         }
-    });
 
-    // Fonction pour envoyer le fichier au backend
-    function uploadFile(file) {
-        const formData = new FormData();
-        formData.append("file", file);
-
-        fetch("/upload", {
-            method: "POST",
-            body: formData,
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.error) {
-                    alert("Erreur : " + data.error);
-                } else {
-                    alert("Fichier analysé : " + data.result);
-                    // Actualiser la page ou afficher les résultats
-                    window.location.reload(); // Par exemple, recharger la page
+        // Mettre en évidence la zone de dépôt lors du survol
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropzone.addEventListener(eventName, function() {
+                if (!isUploading) {
+                    dropzone.classList.add("dragover");
                 }
-            })
-            .catch((error) => {
-                console.error("Erreur lors de l'upload :", error);
-                alert("Une erreur s'est produite lors de l'upload.");
-            });
+            }, false);
+        });
+
+        // Supprimer la mise en évidence lors du départ
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropzone.addEventListener(eventName, function() {
+                dropzone.classList.remove("dragover");
+            }, false);
+        });
+
+        // Gérer le dépôt de fichiers
+        dropzone.addEventListener("drop", function(e) {
+            if (isUploading) return;
+            
+            const file = e.dataTransfer.files[0];
+            if (file) {
+                isUploading = true;
+                uploadFile(file);
+                
+                // Réinitialiser le drapeau après un délai
+                setTimeout(() => {
+                    isUploading = false;
+                }, 500);
+            }
+        }, false);
     }
 });

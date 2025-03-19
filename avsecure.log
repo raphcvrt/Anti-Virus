@@ -213,3 +213,15 @@
 {"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-19T09:04:38Z"}
 {"error":"open templates/analyse.html: no such file or directory","level":"info","msg":"Erreur lors du chargement des templates","time":"2025-03-19T09:04:38Z"}
 {"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-19T09:05:39Z"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-19T09:12:57Z"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-19T09:14:38Z"}
+{"file":"/tmp/eicar.com","level":"info","msg":"Fichier infecté détecté","result":"infected","time":"2025-03-19T09:15:15Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat de l'analyse ClamAV","result":"infected","time":"2025-03-19T09:15:15Z"}
+{"file":"/tmp/eicar.com","level":"info","msg":"Fichier infecté détecté","result":"infected","time":"2025-03-19T09:15:15Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat de l'analyse ClamAV","result":"infected","time":"2025-03-19T09:15:15Z"}
+{"file":"/tmp/eicar.com","level":"info","msg":"Fichier analysé avec VirusTotal","result":"clean","time":"2025-03-19T09:15:31Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat de l'analyse VirusTotal","result":"clean","time":"2025-03-19T09:15:31Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat final de l'analyse","result":"infected","time":"2025-03-19T09:15:31Z"}
+{"file":"/tmp/eicar.com","level":"info","msg":"Fichier analysé avec VirusTotal","result":"clean","time":"2025-03-19T09:15:31Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat de l'analyse VirusTotal","result":"clean","time":"2025-03-19T09:15:31Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat final de l'analyse","result":"infected","time":"2025-03-19T09:15:31Z"}
