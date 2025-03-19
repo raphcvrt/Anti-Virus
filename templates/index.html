@@ -71,7 +71,6 @@
                     <th>ClamAV</th>
                     <th>VirusTotal</th>
                     <th>Statut</th>
-                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody id="recent-scans">
@@ -87,9 +86,6 @@
                             <i class="fas fa-eye"></i>
                         </button>
                         {{ if eq .Status "infected" }}
-                        <button class="btn-icon quarantine" data-id="{{ .ID }}">
-                            <i class="fas fa-shield-alt"></i>
-                        </button>
                         {{ end }}
                     </td>
                 </tr>
