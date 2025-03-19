@@ -23,7 +23,29 @@ Ce projet est un **antivirus automatisé** qui surveille un repertoire spécifiq
 
 - Chiffrement des clés API.
 - securisation avancée du server
-- darkmode
+- gestion multiutilisateurs
+- ajouter plus d'api
 
-```go run backend/main.go backend/logger.go backend/scanner.go backend/templates.go``` 
-http://10.0.1.12:9555
+```
+   11  sudo apt update
+   12  sudo apt install -y golang clamav clamav-daemon build-essential
+   13  sudo mkdir -p /etc/clamav
+   14  sudo freshclam
+   15  mkdir -p ~/avsecure
+   16  cd ~/avsecure
+   17  sudo apt update
+   18  sudo apt install nginx
+   19  sudo nano /etc/nginx/sites-available/avsecure
+   20  sudo ln -s /etc/nginx/sites-available/avsecure /etc/nginx/sites-enabled/
+   21  sudo nginx -t
+   22  sudo systemctl restart nginx
+   23  sudo ufw allow 'Nginx Full'
+   24  sudo ufw allow 9555/tcp
+   25  sudo ufw reload
+   31  sudo systemctl start nginx
+   32  sudo systemctl enable nginx
+   33  sudo systemctl status nginx
+   35  git clone https://github.com/raphcvrt/Anti-Virus.git
+   37  cd Anti-Virus/
+   40  go run backend/main.go backend/logger.go backend/scanner.go backend/templates.go 
+```

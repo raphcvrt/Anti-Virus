@@ -328,3 +328,4 @@
 {"file":"/tmp/rendu.md","level":"info","msg":"Fichier analysé avec VirusTotal","result":"clean","time":"2025-03-19T10:53:57Z"}
 {"file":"rendu.md","level":"info","msg":"Résultat de l'analyse VirusTotal","result":"clean","time":"2025-03-19T10:53:57Z"}
 {"file":"rendu.md","level":"info","msg":"Résultat final de l'analyse","result":"clean","time":"2025-03-19T10:53:57Z"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-19T11:10:36Z"}

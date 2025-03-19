@@ -1,1 +1,0 @@
-{"Stats":{"files_scanned":2,"threats_detected":1,"protection_rate":50},"RecentScans":[{"id":"2","file_name":"rendu.md","date":"19/03/2025 10:53","clamav_result":"clean","virustotal_result":"clean","status":"clean"},{"id":"1","file_name":"eicar.com","date":"19/03/2025 10:53","clamav_result":"infected","virustotal_result":"clean","status":"infected"}]}
