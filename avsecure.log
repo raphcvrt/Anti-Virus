@@ -562,3 +562,86 @@
 {"file":"eicar.com","level":"info","msg":"Résultat final de l'analyse","result":"infected","time":"2025-03-20T10:35:15Z"}
 {"file":"eicar.com","level":"info","msg":"Résultat de l'analyse MetaDefender","result":"infected","time":"2025-03-20T10:35:15Z"}
 {"file":"eicar.com","level":"info","msg":"Résultat de l'analyse Hybrid Analysis","result":"infected","time":"2025-03-20T10:35:15Z"}
+{"file":"bon.com","level":"info","msg":"Début de l'analyse du fichier","time":"2025-03-20T10:39:39Z"}
+{"file":"/tmp/bon.com","level":"info","msg":"Fichier analysé avec MetaDefender","result":"clean","time":"2025-03-20T10:39:42Z"}
+{"file":"bon.com","level":"info","msg":"Résultat de l'analyse MetaDefender","result":"clean","time":"2025-03-20T10:39:42Z"}
+{"file":"/tmp/bon.com","level":"info","msg":"Fichier analysé avec ClamAV","result":"clean","time":"2025-03-20T10:39:51Z"}
+{"file":"bon.com","level":"info","msg":"Résultat de l'analyse ClamAV","result":"clean","time":"2025-03-20T10:39:51Z"}
+{"file":"/tmp/bon.com","level":"info","msg":"Fichier analysé avec VirusTotal","result":"clean","time":"2025-03-20T10:40:10Z"}
+{"file":"bon.com","level":"info","msg":"Résultat de l'analyse VirusTotal","result":"clean","time":"2025-03-20T10:40:10Z"}
+{"file":"/tmp/bon.com","level":"info","msg":"Délai d'attente dépassé pour l'analyse Hybrid Analysis","time":"2025-03-20T10:41:02Z"}
+{"error":"erreur Hybrid Analysis: délai d'attente dépassé pour l'analyse Hybrid Analysis","file":"bon.com","level":"info","msg":"Erreur lors de l'analyse","time":"2025-03-20T10:41:02Z"}
+{"file":"bon.com","level":"info","msg":"Résultat final de l'analyse","result":"clean","time":"2025-03-20T10:41:02Z"}
+{"error":"une ou plusieurs analyses ont échoué: ClamAV: \u003cnil\u003e, VirusTotal: \u003cnil\u003e, MetaDefender: \u003cnil\u003e, Hybrid Analysis: erreur Hybrid Analysis: délai d'attente dépassé pour l'analyse Hybrid Analysis","file":"bon.com","level":"info","msg":"Erreur lors de l'analyse du fichier","time":"2025-03-20T10:41:02Z"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-20T10:44:20Z"}
+{"file":"bon.com","level":"info","msg":"Début de l'analyse du fichier","time":"2025-03-20T10:44:27Z"}
+{"file":"/tmp/bon.com","level":"info","msg":"Fichier analysé avec MetaDefender","result":"clean","time":"2025-03-20T10:44:31Z"}
+{"file":"bon.com","level":"info","msg":"Résultat de l'analyse MetaDefender","result":"clean","time":"2025-03-20T10:44:31Z"}
+{"file":"/tmp/bon.com","level":"info","msg":"Fichier analysé avec Hybrid Analysis","result":"clean","time":"2025-03-20T10:44:33Z","verdict":"no specific threat"}
+{"file":"bon.com","level":"info","msg":"Résultat de l'analyse Hybrid Analysis","result":"clean","time":"2025-03-20T10:44:33Z"}
+{"file":"/tmp/bon.com","level":"info","msg":"Fichier analysé avec ClamAV","result":"clean","time":"2025-03-20T10:44:41Z"}
+{"file":"bon.com","level":"info","msg":"Résultat de l'analyse ClamAV","result":"clean","time":"2025-03-20T10:44:41Z"}
+{"file":"/tmp/bon.com","level":"info","msg":"Fichier analysé avec VirusTotal","result":"clean","time":"2025-03-20T10:44:58Z"}
+{"file":"bon.com","level":"info","msg":"Résultat de l'analyse VirusTotal","result":"clean","time":"2025-03-20T10:44:58Z"}
+{"file":"bon.com","level":"info","msg":"Résultat final de l'analyse","result":"clean","time":"2025-03-20T10:44:58Z"}
+{"file":"bon.com","level":"info","msg":"Résultat de l'analyse MetaDefender","result":"clean","time":"2025-03-20T10:44:58Z"}
+{"file":"bon.com","level":"info","msg":"Résultat de l'analyse Hybrid Analysis","result":"clean","time":"2025-03-20T10:44:58Z"}
+{"file":"avsecure.log","level":"info","msg":"Début de l'analyse du fichier","time":"2025-03-20T10:45:09Z"}
+{"file":"/tmp/avsecure.log","level":"info","msg":"Fichier analysé avec MetaDefender","result":"clean","time":"2025-03-20T10:45:13Z"}
+{"file":"avsecure.log","level":"info","msg":"Résultat de l'analyse MetaDefender","result":"clean","time":"2025-03-20T10:45:13Z"}
+{"file":"/tmp/avsecure.log","level":"info","msg":"Échec de l'analyse Hybrid Analysis","state":"ERROR","time":"2025-03-20T10:45:18Z"}
+{"error":"erreur Hybrid Analysis: échec de l'analyse Hybrid Analysis: ERROR","file":"avsecure.log","level":"info","msg":"Erreur lors de l'analyse","time":"2025-03-20T10:45:18Z"}
+{"file":"/tmp/avsecure.log","level":"info","msg":"Fichier analysé avec ClamAV","result":"clean","time":"2025-03-20T10:45:23Z"}
+{"file":"avsecure.log","level":"info","msg":"Résultat de l'analyse ClamAV","result":"clean","time":"2025-03-20T10:45:23Z"}
+{"file":"/tmp/avsecure.log","level":"info","msg":"Fichier analysé avec VirusTotal","result":"clean","time":"2025-03-20T10:45:40Z"}
+{"file":"avsecure.log","level":"info","msg":"Résultat de l'analyse VirusTotal","result":"clean","time":"2025-03-20T10:45:40Z"}
+{"file":"avsecure.log","level":"info","msg":"Résultat final de l'analyse","result":"clean","time":"2025-03-20T10:45:40Z"}
+{"error":"une ou plusieurs analyses ont échoué: ClamAV: \u003cnil\u003e, VirusTotal: \u003cnil\u003e, MetaDefender: \u003cnil\u003e, Hybrid Analysis: erreur Hybrid Analysis: échec de l'analyse Hybrid Analysis: ERROR","file":"avsecure.log","level":"info","msg":"Erreur lors de l'analyse du fichier","time":"2025-03-20T10:45:40Z"}
+{"level":"info","msg":"Démarrage de l'application AVSecure","time":"2025-03-20T10:46:28Z"}
+{"file":"avsecure.log","level":"info","msg":"Début de l'analyse du fichier","time":"2025-03-20T10:46:34Z"}
+{"file":"/tmp/avsecure.log","level":"info","msg":"Fichier analysé avec MetaDefender","result":"clean","time":"2025-03-20T10:46:44Z"}
+{"file":"avsecure.log","level":"info","msg":"Résultat de l'analyse MetaDefender","result":"clean","time":"2025-03-20T10:46:44Z"}
+{"file":"/tmp/avsecure.log","level":"info","msg":"Échec de l'analyse Hybrid Analysis","state":"ERROR","time":"2025-03-20T10:46:44Z"}
+{"error":"erreur Hybrid Analysis: échec de l'analyse Hybrid Analysis: ERROR","file":"avsecure.log","level":"info","msg":"Erreur lors de l'analyse","time":"2025-03-20T10:46:44Z"}
+{"file":"/tmp/avsecure.log","level":"info","msg":"Fichier analysé avec ClamAV","result":"clean","time":"2025-03-20T10:46:47Z"}
+{"file":"avsecure.log","level":"info","msg":"Résultat de l'analyse ClamAV","result":"clean","time":"2025-03-20T10:46:47Z"}
+{"file":"/tmp/avsecure.log","level":"info","msg":"Fichier analysé avec VirusTotal","result":"clean","time":"2025-03-20T10:47:05Z"}
+{"file":"avsecure.log","level":"info","msg":"Résultat de l'analyse VirusTotal","result":"clean","time":"2025-03-20T10:47:05Z"}
+{"file":"avsecure.log","level":"info","msg":"Résultat final de l'analyse","result":"clean","time":"2025-03-20T10:47:05Z"}
+{"error":"une ou plusieurs analyses ont échoué: ClamAV: \u003cnil\u003e, VirusTotal: \u003cnil\u003e, MetaDefender: \u003cnil\u003e, Hybrid Analysis: erreur Hybrid Analysis: échec de l'analyse Hybrid Analysis: ERROR","file":"avsecure.log","level":"info","msg":"Erreur lors de l'analyse du fichier","time":"2025-03-20T10:47:05Z"}
+{"file":"eicar.com","level":"info","msg":"Début de l'analyse du fichier","time":"2025-03-20T10:47:17Z"}
+{"file":"/tmp/eicar.com","level":"info","msg":"Fichier infecté détecté par MetaDefender","result":"infected","status":"Infected","time":"2025-03-20T10:47:20Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat de l'analyse MetaDefender","result":"infected","time":"2025-03-20T10:47:20Z"}
+{"file":"/tmp/eicar.com","level":"info","msg":"Fichier infecté détecté par Hybrid Analysis","result":"infected","time":"2025-03-20T10:47:23Z","verdict":"malicious"}
+{"file":"eicar.com","level":"info","msg":"Résultat de l'analyse Hybrid Analysis","result":"infected","time":"2025-03-20T10:47:23Z"}
+{"file":"/tmp/eicar.com","level":"info","msg":"Fichier infecté détecté","result":"infected","time":"2025-03-20T10:47:30Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat de l'analyse ClamAV","result":"infected","time":"2025-03-20T10:47:30Z"}
+{"file":"/tmp/eicar.com","level":"info","msg":"Fichier infecté détecté par VirusTotal","result":"infected","time":"2025-03-20T10:47:49Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat de l'analyse VirusTotal","result":"infected","time":"2025-03-20T10:47:49Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat final de l'analyse","result":"infected","time":"2025-03-20T10:47:49Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat de l'analyse MetaDefender","result":"infected","time":"2025-03-20T10:47:49Z"}
+{"file":"eicar.com","level":"info","msg":"Résultat de l'analyse Hybrid Analysis","result":"infected","time":"2025-03-20T10:47:49Z"}
+{"file":"bon.com","level":"info","msg":"Début de l'analyse du fichier","time":"2025-03-20T10:48:17Z"}
+{"file":"/tmp/bon.com","level":"info","msg":"Fichier analysé avec MetaDefender","result":"clean","time":"2025-03-20T10:48:21Z"}
+{"file":"bon.com","level":"info","msg":"Résultat de l'analyse MetaDefender","result":"clean","time":"2025-03-20T10:48:21Z"}
+{"file":"/tmp/bon.com","level":"info","msg":"Fichier analysé avec Hybrid Analysis","result":"clean","time":"2025-03-20T10:48:23Z","verdict":"no specific threat"}
+{"file":"bon.com","level":"info","msg":"Résultat de l'analyse Hybrid Analysis","result":"clean","time":"2025-03-20T10:48:23Z"}
+{"file":"/tmp/bon.com","level":"info","msg":"Fichier analysé avec ClamAV","result":"clean","time":"2025-03-20T10:48:30Z"}
+{"file":"bon.com","level":"info","msg":"Résultat de l'analyse ClamAV","result":"clean","time":"2025-03-20T10:48:30Z"}
+{"file":"/tmp/bon.com","level":"info","msg":"Fichier analysé avec VirusTotal","result":"clean","time":"2025-03-20T10:48:49Z"}
+{"file":"bon.com","level":"info","msg":"Résultat de l'analyse VirusTotal","result":"clean","time":"2025-03-20T10:48:49Z"}
+{"file":"bon.com","level":"info","msg":"Résultat final de l'analyse","result":"clean","time":"2025-03-20T10:48:49Z"}
+{"file":"bon.com","level":"info","msg":"Résultat de l'analyse MetaDefender","result":"clean","time":"2025-03-20T10:48:49Z"}
+{"file":"bon.com","level":"info","msg":"Résultat de l'analyse Hybrid Analysis","result":"clean","time":"2025-03-20T10:48:49Z"}
+{"file":"bon.com","level":"info","msg":"Début de l'analyse du fichier","time":"2025-03-20T10:49:07Z"}
+{"file":"/tmp/bon.com","level":"info","msg":"Fichier analysé avec MetaDefender","result":"clean","time":"2025-03-20T10:49:12Z"}
+{"file":"bon.com","level":"info","msg":"Résultat de l'analyse MetaDefender","result":"clean","time":"2025-03-20T10:49:12Z"}
+{"file":"/tmp/bon.com","level":"info","msg":"Fichier analysé avec Hybrid Analysis","result":"clean","time":"2025-03-20T10:49:15Z","verdict":"no specific threat"}
+{"file":"bon.com","level":"info","msg":"Résultat de l'analyse Hybrid Analysis","result":"clean","time":"2025-03-20T10:49:15Z"}
+{"file":"/tmp/bon.com","level":"info","msg":"Fichier analysé avec ClamAV","result":"clean","time":"2025-03-20T10:49:20Z"}
+{"file":"bon.com","level":"info","msg":"Résultat de l'analyse ClamAV","result":"clean","time":"2025-03-20T10:49:20Z"}
+{"file":"/tmp/bon.com","level":"info","msg":"Fichier analysé avec VirusTotal","result":"clean","time":"2025-03-20T10:49:41Z"}
+{"file":"bon.com","level":"info","msg":"Résultat de l'analyse VirusTotal","result":"clean","time":"2025-03-20T10:49:41Z"}
+{"file":"bon.com","level":"info","msg":"Résultat final de l'analyse","result":"clean","time":"2025-03-20T10:49:41Z"}
+{"file":"bon.com","level":"info","msg":"Résultat de l'analyse MetaDefender","result":"clean","time":"2025-03-20T10:49:41Z"}
+{"file":"bon.com","level":"info","msg":"Résultat de l'analyse Hybrid Analysis","result":"clean","time":"2025-03-20T10:49:41Z"}

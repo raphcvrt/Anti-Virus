@@ -451,7 +451,7 @@ func scanWithHybridAnalysis(filePath string) (string, error) {
 
 	// Envoyer la requête
 	client := &http.Client{
-		Timeout: 15 * time.Second, // Augmentez le timeout à 15 secondes
+		Timeout: 60 * time.Second, // Augmentez le timeout à 15 secondes
 	}
 	resp, err := client.Do(req)
 	if err != nil {
