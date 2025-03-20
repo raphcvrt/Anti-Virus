@@ -450,9 +450,7 @@ func scanWithHybridAnalysis(filePath string) (string, error) {
 	req.Header.Set("User-Agent", "Falcon Sandbox")
 
 	// Envoyer la requête
-	client := &http.Client{
-		Timeout: 60 * time.Second, // Augmentez le timeout à 15 secondes
-	}
+	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
 		logEvent("Erreur lors de l'envoi de la requête", map[string]interface{}{
