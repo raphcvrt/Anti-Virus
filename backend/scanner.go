@@ -609,11 +609,11 @@ func scanWithHybridAnalysis(filePath string) (string, error) {
 				return "clean", nil
 			}
 		} else if state == "ERROR" || state == "FAILED" {
-			logEvent("Échec de l'analyse Hybrid Analysis", map[string]interface{}{
+			logEvent("Hybrid Analysis a échoué, mais on continue l'analyse", map[string]interface{}{
 				"file":  filePath,
 				"state": state,
 			})
-			return "", fmt.Errorf("échec de l'analyse Hybrid Analysis: %s", state)
+			return "indeterminate", nil // On retourne "indeterminate" au lieu d'une erreur
 		}
 		// Si le statut est PENDING ou IN_PROGRESS, continuer à attendre
 	}
