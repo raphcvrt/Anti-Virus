@@ -1,0 +1,25 @@
+.
+├── A FAIRE !!
+├── avsecure.log
+├── backend
+│   ├── logger.go
+│   ├── main.go
+│   ├── scanner.go
+│   └── templates.go
+├── backup_logs.sh
+├── eicar.com
+├── go.mod
+├── go.sum
+├── README.md
+├── Saves
+│   └── log_backup_2025-03-19.tar.gz
+├── static
+│   ├── scripts.js
+│   ├── _styles.css
+│   └── styles.css
+├── templates
+│   ├── index.html
+│   └── layout.html
+└── tree.txt
+
+5 directories, 18 files

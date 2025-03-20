@@ -106,7 +106,9 @@ func scanWithVirusTotal(filePath string) (string, error) {
 	req.Header.Set("Content-Type", writer.FormDataContentType())
 
 	// Envoyer la requête
-	client := &http.Client{}
+	client := &http.Client{
+		Timeout: 15 * time.Second, // Augmentez le timeout à 15 secondes
+	}
 	resp, err := client.Do(req)
 	if err != nil {
 		logEvent("Erreur lors de l'envoi de la requête", map[string]interface{}{
@@ -268,7 +270,9 @@ func scanWithMetaDefender(filePath string) (string, error) {
 	req.Header.Set("Content-Length", fmt.Sprintf("%d", fileInfo.Size()))
 
 	// Envoyer la requête
-	client := &http.Client{}
+	client := &http.Client{
+		Timeout: 15 * time.Second, // Augmentez le timeout à 15 secondes
+	}
 	resp, err := client.Do(req)
 	if err != nil {
 		logEvent("Erreur lors de l'envoi de la requête", map[string]interface{}{
@@ -446,7 +450,9 @@ func scanWithHybridAnalysis(filePath string) (string, error) {
 	req.Header.Set("User-Agent", "Falcon Sandbox")
 
 	// Envoyer la requête
-	client := &http.Client{}
+	client := &http.Client{
+		Timeout: 15 * time.Second, // Augmentez le timeout à 15 secondes
+	}
 	resp, err := client.Do(req)
 	if err != nil {
 		logEvent("Erreur lors de l'envoi de la requête", map[string]interface{}{

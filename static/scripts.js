@@ -23,7 +23,6 @@ function fetchRecentScans() {
                     <td>${scan.metadefender_result}</td> <!-- Résultat de MetaDefender -->
                     <td>${scan.hybridanalysis_result}</td> <!-- Résultat de Hybrid Analysis -->
                     <td><span class="status-badge ${scan.status.toLowerCase() === 'clean' ? 'status-clean' : 'status-infected'}">${scan.status}</span></td>
-                    <td><a href="#" class="view-details" data-id="${scan.id}"><i class="fas fa-eye"></i></a></td>
                 `;
                 tableBody.appendChild(row);
             });
