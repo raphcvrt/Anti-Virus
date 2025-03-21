@@ -82,3 +82,4 @@ Site qui permet de verifier la sécurité d'un fichier
 - **Sécurisation avancée du serveur** : Configurer SELinux ou AppArmor pour renforcer la sécurité du serveur.
 - **Gestion multi-utilisateurs** : Ajouter une gestion des utilisateurs avec des comptes.
 - **Optimisation des performances** : systemd
+- **Règles d'upload** : limites de taille, extentions specifiques 

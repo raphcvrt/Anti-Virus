@@ -138,7 +138,7 @@ func main() {
 func renderDashboard(c *gin.Context) {
 	fmt.Println("🔍 Rendu de la page d'accueil")
 	data := TemplateData{
-		Title:       "AVSecure - Tableau de bord",
+		Title:       "CAMOLENN - Tableau de bord",
 		ActivePage:  "dashboard",
 		Stats:       stats,       // Statistiques
 		RecentScans: recentScans, // Analyses récentes
